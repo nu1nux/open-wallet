@@ -1,0 +1,55 @@
+version: '3.8'
+
+# Development environment for Wallet Suite
+# Starts local blockchain nodes for testing
+
+services:
+  # Local EVM node (Foundry Anvil)
+  anvil:
+    image: ghcr.io/foundry-rs/foundry:latest
+    container_name: wallet-suite-anvil
+    ports:
+      - "8545:8545"
+    command: >
+      anvil
+      --host 0.0.0.0
+      --port 8545
+      --accounts 10
+      --balance 10000
+      --block-time 1
+      --chain-id 31337
+    healthcheck:
+      test: ["CMD", "cast", "block-number", "--rpc-url", "http://localhost:8545"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Local Solana test validator
+  solana-validator:
+    image: solanalabs/solana:v1.18.0
+    container_name: wallet-suite-solana
+    ports:
+      - "8899:8899"  # RPC
+      - "8900:8900"  # WebSocket
+      - "9900:9900"  # Faucet
+    volumes:
+      - solana-ledger:/root/solana-ledger
+    command: >
+      solana-test-validator
+      --ledger /root/solana-ledger
+      --rpc-port 8899
+      --no-bpf-jit
+      --reset
+    healthcheck:
+      test: ["CMD", "solana", "cluster-version", "--url", "http://localhost:8899"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  solana-ledger:
+    driver: local
+
+networks:
+  default:
+    name: wallet-suite-dev

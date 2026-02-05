@@ -1,0 +1,117 @@
+version: '3.8'
+
+# MPC Party Infrastructure
+# 3-party threshold signature setup (2-of-3)
+
+services:
+  # MPC Party 0
+  mpc-party-0:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.mpc
+    container_name: mpc-party-0
+    environment:
+      - MPC_PARTY_INDEX=0
+      - MPC_THRESHOLD=2
+      - MPC_TOTAL_PARTIES=3
+      - MPC_PORT=9001
+      - MPC_PARTY_URLS=http://mpc-party-0:9001,http://mpc-party-1:9002,http://mpc-party-2:9003
+      - LOG_LEVEL=info
+    ports:
+      - "9001:9001"
+    volumes:
+      - mpc-keys-0:/app/keys
+    networks:
+      - mpc-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MPC Party 1
+  mpc-party-1:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.mpc
+    container_name: mpc-party-1
+    environment:
+      - MPC_PARTY_INDEX=1
+      - MPC_THRESHOLD=2
+      - MPC_TOTAL_PARTIES=3
+      - MPC_PORT=9002
+      - MPC_PARTY_URLS=http://mpc-party-0:9001,http://mpc-party-1:9002,http://mpc-party-2:9003
+      - LOG_LEVEL=info
+    ports:
+      - "9002:9002"
+    volumes:
+      - mpc-keys-1:/app/keys
+    networks:
+      - mpc-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9002/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MPC Party 2
+  mpc-party-2:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.mpc
+    container_name: mpc-party-2
+    environment:
+      - MPC_PARTY_INDEX=2
+      - MPC_THRESHOLD=2
+      - MPC_TOTAL_PARTIES=3
+      - MPC_PORT=9003
+      - MPC_PARTY_URLS=http://mpc-party-0:9001,http://mpc-party-1:9002,http://mpc-party-2:9003
+      - LOG_LEVEL=info
+    ports:
+      - "9003:9003"
+    volumes:
+      - mpc-keys-2:/app/keys
+    networks:
+      - mpc-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9003/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MPC Coordinator (for ceremony orchestration)
+  mpc-coordinator:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.mpc
+    container_name: mpc-coordinator
+    environment:
+      - MPC_ROLE=coordinator
+      - MPC_THRESHOLD=2
+      - MPC_TOTAL_PARTIES=3
+      - MPC_PORT=9000
+      - MPC_PARTY_URLS=http://mpc-party-0:9001,http://mpc-party-1:9002,http://mpc-party-2:9003
+      - LOG_LEVEL=info
+    ports:
+      - "9000:9000"
+    networks:
+      - mpc-network
+    depends_on:
+      - mpc-party-0
+      - mpc-party-1
+      - mpc-party-2
+
+volumes:
+  mpc-keys-0:
+    driver: local
+  mpc-keys-1:
+    driver: local
+  mpc-keys-2:
+    driver: local
+
+networks:
+  mpc-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
