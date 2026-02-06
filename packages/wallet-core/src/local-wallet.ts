@@ -286,6 +286,32 @@ export class LocalWallet extends BaseWallet {
     return ok(undefined);
   }
 
+  async updateAlias(newAlias: string): Promise<Result<void>> {
+    if (!this.isUnlocked()) {
+      return err(ErrorCode.WALLET_LOCKED, 'Wallet is locked');
+    }
+
+    const trimmed = newAlias.trim();
+
+    if (!trimmed) {
+      // Clear alias
+      await releaseAlias(this.storage, this.metadata.id);
+      this.metadata.alias = undefined;
+      await this.saveWalletState();
+      logger.info('Alias cleared');
+      return ok(undefined);
+    }
+
+    // Reserve new alias (this also releases old one if different)
+    const reserved = await reserveAlias(this.storage, this.metadata.id, trimmed);
+    if (!reserved.ok) return reserved;
+
+    this.metadata.alias = trimmed;
+    await this.saveWalletState();
+    logger.info('Alias updated', { alias: trimmed });
+    return ok(undefined);
+  }
+
   override async destroy(): Promise<void> {
     await releaseAlias(this.storage, this.metadata.id);
     await super.destroy();

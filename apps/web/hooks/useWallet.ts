@@ -118,6 +118,28 @@ export function useWallet() {
     }
   }, []);
 
+  const updateAlias = useCallback(async (newAlias: string) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const wallet = getWallet();
+      const result = await wallet.updateAlias(newAlias);
+
+      if (!result.ok) {
+        setError(result.error.message);
+        return false;
+      }
+
+      return true;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update alias');
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   return {
     wallet: walletInstance,
     isLoading,
@@ -126,5 +148,6 @@ export function useWallet() {
     unlockWallet,
     lockWallet,
     createAccount,
+    updateAlias,
   };
 }
