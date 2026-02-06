@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Card, CardContent, Input, Spinner, Alert, AddressDisplay } from '@open-wallet/ui-kit';
+import { Button, Card, CardContent, Input, Spinner, Alert, AddressDisplay } from '../components/ui';
 
 type View = 'loading' | 'create' | 'unlock' | 'dashboard';
 
@@ -7,7 +7,6 @@ export function App() {
   const [view, setView] = useState<View>('loading');
 
   useEffect(() => {
-    // Check if wallet exists
     checkWalletStatus();
   }, []);
 
@@ -26,7 +25,7 @@ export function App() {
 
   if (view === 'loading') {
     return (
-      <div className="flex h-full items-center justify-center bg-gray-50">
+      <div className="flex h-full items-center justify-center bg-neutral-50">
         <Spinner size="lg" />
       </div>
     );
@@ -63,7 +62,6 @@ function CreateView({ onSuccess }: { onSuccess: () => void }) {
     setError(null);
 
     try {
-      // In real implementation, this would create an encrypted wallet
       await chrome.storage.local.set({ wallet: { created: Date.now() } });
       onSuccess();
     } catch (err) {
@@ -74,14 +72,14 @@ function CreateView({ onSuccess }: { onSuccess: () => void }) {
   };
 
   return (
-    <div className="flex h-full flex-col bg-gray-50 p-4">
+    <div className="flex h-full flex-col bg-neutral-50 p-4">
       <div className="mb-6 text-center">
-        <h1 className="text-xl font-bold text-gray-900">Wallet Suite</h1>
-        <p className="text-sm text-gray-500">Create a new wallet</p>
+        <h1 className="text-lg font-semibold text-neutral-900">Open Wallet</h1>
+        <p className="text-sm text-neutral-500">Create a new wallet</p>
       </div>
 
       <Card className="flex-1">
-        <CardContent className="space-y-4 pt-4">
+        <CardContent className="space-y-4">
           <Input
             label="Password"
             type="password"
@@ -124,7 +122,6 @@ function UnlockView({ onSuccess }: { onSuccess: () => void }) {
     setError(null);
 
     try {
-      // In real implementation, this would decrypt the wallet
       await new Promise((resolve) => setTimeout(resolve, 500));
       onSuccess();
     } catch {
@@ -135,14 +132,14 @@ function UnlockView({ onSuccess }: { onSuccess: () => void }) {
   };
 
   return (
-    <div className="flex h-full flex-col bg-gray-50 p-4">
+    <div className="flex h-full flex-col bg-neutral-50 p-4">
       <div className="mb-6 text-center">
-        <h1 className="text-xl font-bold text-gray-900">Wallet Suite</h1>
-        <p className="text-sm text-gray-500">Unlock your wallet</p>
+        <h1 className="text-lg font-semibold text-neutral-900">Open Wallet</h1>
+        <p className="text-sm text-neutral-500">Unlock your wallet</p>
       </div>
 
       <Card className="flex-1">
-        <CardContent className="space-y-4 pt-4">
+        <CardContent className="space-y-4">
           <Input
             label="Password"
             type="password"
@@ -172,29 +169,29 @@ function DashboardView({ onLock }: { onLock: () => void }) {
   const mockAddress = '0x1234567890123456789012345678901234567890';
 
   return (
-    <div className="flex h-full flex-col bg-gray-50">
+    <div className="flex h-full flex-col bg-neutral-50">
       {/* Header */}
-      <div className="flex items-center justify-between border-b bg-white px-4 py-3">
-        <h1 className="font-semibold text-gray-900">Wallet Suite</h1>
+      <div className="flex items-center justify-between border-b border-neutral-200 bg-white px-4 py-3">
+        <h1 className="font-semibold text-neutral-900">Open Wallet</h1>
         <Button variant="ghost" size="sm" onClick={onLock}>
           Lock
         </Button>
       </div>
 
       {/* Account */}
-      <div className="border-b bg-white px-4 py-4">
-        <div className="text-sm text-gray-500">Account 1</div>
+      <div className="border-b border-neutral-200 bg-white px-4 py-4">
+        <div className="text-sm text-neutral-500">Account 1</div>
         <AddressDisplay address={mockAddress} truncateChars={8} />
       </div>
 
       {/* Balance */}
-      <div className="border-b bg-white px-4 py-6 text-center">
-        <div className="text-3xl font-bold text-gray-900">0.00 ETH</div>
-        <div className="text-sm text-gray-500">$0.00 USD</div>
+      <div className="border-b border-neutral-200 bg-white px-4 py-6 text-center">
+        <div className="text-2xl font-semibold text-neutral-900">0.00 ETH</div>
+        <div className="text-sm text-neutral-500">$0.00 USD</div>
       </div>
 
       {/* Actions */}
-      <div className="flex gap-2 border-b bg-white px-4 py-4">
+      <div className="flex gap-2 border-b border-neutral-200 bg-white px-4 py-4">
         <Button fullWidth variant="primary">
           Send
         </Button>
@@ -205,8 +202,8 @@ function DashboardView({ onLock }: { onLock: () => void }) {
 
       {/* Activity */}
       <div className="flex-1 overflow-auto p-4">
-        <div className="text-sm font-medium text-gray-700">Activity</div>
-        <div className="mt-2 text-center text-sm text-gray-400">
+        <div className="text-sm font-medium text-neutral-700">Activity</div>
+        <div className="mt-2 text-center text-sm text-neutral-400">
           No transactions yet
         </div>
       </div>

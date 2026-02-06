@@ -12,10 +12,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@base-ui/react": "^1.1.0",
     "@open-wallet/security": "workspace:*",
     "@open-wallet/storage": "workspace:*",
     "@open-wallet/types": "workspace:*",
-    "@open-wallet/ui-kit": "workspace:*",
     "@open-wallet/utils": "workspace:*",
     "@open-wallet/wallet-core": "workspace:*",
     "next": "16.1.6",

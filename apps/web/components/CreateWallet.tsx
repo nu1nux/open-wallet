@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, Alert } from '@open-wallet/ui-kit';
+import { Button, Card, CardContent, Input, Alert } from './ui';
 import { useWallet } from '@/hooks/useWallet';
 import { checkPassword } from '@open-wallet/security';
 
@@ -28,102 +28,108 @@ export function CreateWallet() {
   if (step === 'confirm') {
     return (
       <div className="flex min-h-screen items-center justify-center p-4">
-        <Card className="w-full max-w-md" padding="lg">
-          <CardHeader>
-            <CardTitle>Wallet Created!</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Alert variant="success" className="mb-4">
-              Your wallet has been created successfully.
-            </Alert>
-            <p className="text-sm text-gray-600">
-              Your wallet is now ready to use. You can view your accounts and start
-              sending and receiving crypto.
+        <div className="w-full max-w-sm">
+          <div className="mb-8 text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
+              <svg className="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h1 className="text-xl font-semibold text-neutral-900">Wallet Created</h1>
+            <p className="mt-2 text-sm text-neutral-500">
+              Your wallet is ready. You can now manage your crypto assets.
             </p>
-          </CardContent>
-        </Card>
+          </div>
+          <Alert variant="success">
+            Your wallet has been secured and encrypted.
+          </Alert>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <Card className="w-full max-w-md" padding="lg">
-        <CardHeader>
-          <CardTitle>Create Wallet</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleCreate();
-            }}
-            className="space-y-4"
-          >
-            <Input
-              label="Wallet Name (optional)"
-              placeholder="My Wallet"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-
-            <Input
-              label="Password"
-              type="password"
-              placeholder="Enter a strong password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              error={password && !passwordCheck.isAcceptable ? passwordCheck.feedback[0] : undefined}
-            />
-
-            {password && (
-              <div className="text-sm">
-                <span className="text-gray-500">Strength: </span>
-                <span
-                  style={{ color: getStrengthColor(passwordCheck.score) }}
-                  className="font-medium"
-                >
-                  {passwordCheck.strength.replace('_', ' ')}
-                </span>
-              </div>
-            )}
-
-            <Input
-              label="Confirm Password"
-              type="password"
-              placeholder="Confirm your password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              error={confirmPassword && !passwordsMatch ? 'Passwords do not match' : undefined}
-            />
-
-            {error && (
-              <Alert variant="error">{error}</Alert>
-            )}
-
-            <Button
-              type="submit"
-              fullWidth
-              isLoading={isLoading}
-              disabled={!passwordCheck.isAcceptable || !passwordsMatch}
-            >
-              Create Wallet
-            </Button>
-          </form>
-
-          <p className="mt-4 text-center text-xs text-gray-500">
-            By creating a wallet, you agree to store your recovery phrase securely.
+      <div className="w-full max-w-sm">
+        <div className="mb-8 text-center">
+          <h1 className="text-xl font-semibold text-neutral-900">Create Wallet</h1>
+          <p className="mt-2 text-sm text-neutral-500">
+            Set up a password to secure your wallet
           </p>
-        </CardContent>
-      </Card>
+        </div>
+
+        <Card padding="lg">
+          <CardContent>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleCreate();
+              }}
+              className="space-y-4"
+            >
+              <Input
+                label="Wallet Name (optional)"
+                placeholder="My Wallet"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+
+              <div>
+                <Input
+                  label="Password"
+                  type="password"
+                  placeholder="Enter a strong password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  error={password && !passwordCheck.isAcceptable ? passwordCheck.feedback[0] : undefined}
+                />
+                {password && passwordCheck.isAcceptable && (
+                  <div className="mt-2 flex items-center justify-between text-[13px]">
+                    <span className="text-neutral-500">Strength</span>
+                    <span className="font-medium" style={{ color: getStrengthColor(passwordCheck.score) }}>
+                      {passwordCheck.strength.replace('_', ' ')}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <Input
+                label="Confirm Password"
+                type="password"
+                placeholder="Confirm your password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                error={confirmPassword && !passwordsMatch ? 'Passwords do not match' : undefined}
+              />
+
+              {error && (
+                <Alert variant="error">{error}</Alert>
+              )}
+
+              <Button
+                type="submit"
+                fullWidth
+                isLoading={isLoading}
+                disabled={!passwordCheck.isAcceptable || !passwordsMatch}
+              >
+                Create Wallet
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+
+        <p className="mt-4 text-center text-[13px] text-neutral-400">
+          By creating a wallet, you agree to store your recovery phrase securely.
+        </p>
+      </div>
     </div>
   );
 }
 
 function getStrengthColor(score: number): string {
-  if (score < 20) return '#ff4444';
-  if (score < 40) return '#ff8800';
-  if (score < 60) return '#ffcc00';
-  if (score < 80) return '#88cc00';
-  return '#00cc44';
+  if (score < 20) return '#dc2626';
+  if (score < 40) return '#ea580c';
+  if (score < 60) return '#ca8a04';
+  if (score < 80) return '#65a30d';
+  return '#16a34a';
 }
