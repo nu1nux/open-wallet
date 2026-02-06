@@ -31,13 +31,13 @@ export function useWallet() {
     checkWallet();
   }, []);
 
-  const createWallet = useCallback(async (password: string, name?: string) => {
+  const createWallet = useCallback(async (password: string, name?: string, alias?: string) => {
     setIsLoading(true);
     setError(null);
 
     try {
       const wallet = getWallet();
-      const result = await wallet.initialize({ password, name });
+      const result = await wallet.initialize({ password, name, alias });
 
       if (!result.ok) {
         setError(result.error.message);

@@ -30,6 +30,7 @@ import {
 import { signEvmPersonalMessage } from '@open-wallet/keyring';
 import { createLogger } from '@open-wallet/utils';
 import { BaseWallet } from './wallet';
+import { releaseAlias, reserveAlias } from './alias-registry';
 
 const logger = createLogger('local-wallet');
 
@@ -69,6 +70,11 @@ export class LocalWallet extends BaseWallet {
       // Update metadata
       if (options.name) {
         this.metadata.name = options.name;
+      }
+      if (options.alias) {
+        const reserved = await reserveAlias(this.storage, this.metadata.id, options.alias);
+        if (!reserved.ok) return reserved;
+        this.metadata.alias = options.alias.trim();
       }
 
       // Store password for saving
@@ -115,6 +121,11 @@ export class LocalWallet extends BaseWallet {
 
       const result = this.keyring.import(stored, password);
       if (!result.ok) return result;
+    }
+
+    if (this.metadata.alias) {
+      const reserved = await reserveAlias(this.storage, this.metadata.id, this.metadata.alias);
+      if (!reserved.ok) return reserved;
     }
 
     this.password = password;
@@ -273,6 +284,11 @@ export class LocalWallet extends BaseWallet {
 
     logger.info('Password changed');
     return ok(undefined);
+  }
+
+  override async destroy(): Promise<void> {
+    await releaseAlias(this.storage, this.metadata.id);
+    await super.destroy();
   }
 
   protected async saveWalletState(): Promise<void> {

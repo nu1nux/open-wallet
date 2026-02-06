@@ -9,6 +9,7 @@ export function CreateWallet() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
+  const [alias, setAlias] = useState('');
   const [step, setStep] = useState<'create' | 'confirm'>('create');
   const { createWallet, isLoading, error } = useWallet();
 
@@ -19,7 +20,7 @@ export function CreateWallet() {
     if (!passwordCheck.isAcceptable) return;
     if (!passwordsMatch) return;
 
-    const success = await createWallet(password, name || undefined);
+    const success = await createWallet(password, name || undefined, alias || undefined);
     if (success) {
       setStep('confirm');
     }
@@ -72,6 +73,12 @@ export function CreateWallet() {
                 placeholder="My Wallet"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+              />
+              <Input
+                label="Wallet Alias (optional)"
+                placeholder="Main Wallet"
+                value={alias}
+                onChange={(e) => setAlias(e.target.value)}
               />
 
               <div>

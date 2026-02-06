@@ -32,6 +32,8 @@ export interface WalletMetadata {
   id: string;
   /** User-defined wallet name */
   name: string;
+  /** User-defined wallet alias */
+  alias?: string;
   /** Wallet type */
   type: WalletType;
   /** Creation timestamp */
@@ -46,6 +48,8 @@ export interface WalletMetadata {
 export interface InitWalletOptions {
   /** Wallet name */
   name?: string;
+  /** Wallet alias */
+  alias?: string;
   /** Password for encryption */
   password: string;
   /** Optional existing mnemonic (for recovery) */
