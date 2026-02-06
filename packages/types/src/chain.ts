@@ -6,7 +6,7 @@ export enum ChainId {
   ETH_MAINNET = 1,
   ETH_SEPOLIA = 11155111,
   POLYGON_MAINNET = 137,
-  POLYGON_MUMBAI = 80001,
+  POLYGON_AMOY = 80002,
   ARBITRUM_ONE = 42161,
   OPTIMISM = 10,
   BASE = 8453,
@@ -81,14 +81,14 @@ export const CHAIN_CONFIGS: Record<ChainId, ChainConfig> = {
     blockExplorerUrls: ['https://polygonscan.com'],
     isTestnet: false,
   },
-  [ChainId.POLYGON_MUMBAI]: {
-    chainId: ChainId.POLYGON_MUMBAI,
+  [ChainId.POLYGON_AMOY]: {
+    chainId: ChainId.POLYGON_AMOY,
     family: ChainFamily.EVM,
-    name: 'Polygon Mumbai',
-    shortName: 'maticmum',
-    nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
-    rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
-    blockExplorerUrls: ['https://mumbai.polygonscan.com'],
+    name: 'Polygon Amoy',
+    shortName: 'amoy',
+    nativeCurrency: { name: 'POL', symbol: 'POL', decimals: 18 },
+    rpcUrls: ['https://rpc-amoy.polygon.technology'],
+    blockExplorerUrls: ['https://amoy.polygonscan.com'],
     isTestnet: true,
   },
   [ChainId.ARBITRUM_ONE]: {
@@ -214,4 +214,69 @@ export function isEvmChain(chainId: ChainId): boolean {
  */
 export function isSolanaChain(chainId: ChainId): boolean {
   return getChainConfig(chainId).family === ChainFamily.SOLANA;
+}
+
+/**
+ * Human-readable aliases for chain IDs
+ * Used by CLI for easier network selection
+ */
+export const CHAIN_ALIASES: Record<string, ChainId> = {
+  // EVM Mainnets
+  'eth': ChainId.ETH_MAINNET,
+  'eth-mainnet': ChainId.ETH_MAINNET,
+  'ethereum': ChainId.ETH_MAINNET,
+  'polygon': ChainId.POLYGON_MAINNET,
+  'matic': ChainId.POLYGON_MAINNET,
+  'arbitrum': ChainId.ARBITRUM_ONE,
+  'arb': ChainId.ARBITRUM_ONE,
+  'optimism': ChainId.OPTIMISM,
+  'op': ChainId.OPTIMISM,
+  'base': ChainId.BASE,
+  'avalanche': ChainId.AVALANCHE,
+  'avax': ChainId.AVALANCHE,
+  'bsc': ChainId.BSC,
+  'bnb': ChainId.BSC,
+
+  // EVM Testnets
+  'sepolia': ChainId.ETH_SEPOLIA,
+  'eth-sepolia': ChainId.ETH_SEPOLIA,
+  'amoy': ChainId.POLYGON_AMOY,
+  'polygon-amoy': ChainId.POLYGON_AMOY,
+  'local': ChainId.LOCAL_EVM,
+  'anvil': ChainId.LOCAL_EVM,
+
+  // Solana
+  'solana': ChainId.SOLANA_MAINNET,
+  'sol': ChainId.SOLANA_MAINNET,
+  'solana-mainnet': ChainId.SOLANA_MAINNET,
+  'solana-devnet': ChainId.SOLANA_DEVNET,
+  'devnet': ChainId.SOLANA_DEVNET,
+  'solana-testnet': ChainId.SOLANA_TESTNET,
+  'solana-localnet': ChainId.SOLANA_LOCALNET,
+};
+
+/**
+ * Resolve a chain identifier (alias or numeric ID) to a ChainId
+ */
+export function resolveChainId(input: string): ChainId | null {
+  // Try as alias first
+  const alias = CHAIN_ALIASES[input.toLowerCase()];
+  if (alias !== undefined) {
+    return alias;
+  }
+
+  // Try as numeric ID
+  const numericId = parseInt(input, 10);
+  if (!isNaN(numericId) && CHAIN_CONFIGS[numericId as ChainId]) {
+    return numericId as ChainId;
+  }
+
+  return null;
+}
+
+/**
+ * Get all chains for a specific family
+ */
+export function getChainsByFamily(family: ChainFamily): ChainConfig[] {
+  return Object.values(CHAIN_CONFIGS).filter((config) => config.family === family);
 }

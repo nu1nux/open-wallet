@@ -1,6 +1,11 @@
 import chalk from 'chalk';
 import ora from 'ora';
-import { ChainId, getChainConfig, isEvmChain, isSolanaChain } from '@open-wallet/types';
+import {
+  getChainConfig,
+  isEvmChain,
+  isSolanaChain,
+  resolveChainId,
+} from '@open-wallet/types';
 import { createEvmClient } from '@open-wallet/chains-evm';
 import { createSolanaClient, lamportsToSol } from '@open-wallet/chains-solana';
 
@@ -16,7 +21,12 @@ export async function balanceCommand(
   const spinner = ora('Fetching balance...').start();
 
   try {
-    const chainId = parseInt(options.chain, 10) as ChainId;
+    const chainId = resolveChainId(options.chain);
+    if (chainId === null) {
+      spinner.fail(`Unknown chain: ${options.chain}`);
+      console.error(chalk.gray('Run "open-wallet networks" to see available chains'));
+      process.exit(1);
+    }
     const chainConfig = getChainConfig(chainId);
 
     let balance: bigint;
@@ -25,7 +35,7 @@ export async function balanceCommand(
     if (isEvmChain(chainId)) {
       const client = createEvmClient({ chainId });
       balance = await client.getBalance(address as `0x${string}`);
-      formattedBalance = formatEthBalance(balance, chainConfig.nativeCurrency.decimals);
+      formattedBalance = formatEthBalance(balance, chainConfig.nativeCurrency.decimals, chainConfig.nativeCurrency.symbol);
     } else if (isSolanaChain(chainId)) {
       const client = createSolanaClient({ chainId });
       balance = await client.getBalance(address);
@@ -63,13 +73,13 @@ export async function balanceCommand(
   }
 }
 
-function formatEthBalance(wei: bigint, decimals: number): string {
+function formatEthBalance(wei: bigint, decimals: number, symbol: string): string {
   const divisor = BigInt(10 ** decimals);
   const whole = wei / divisor;
   const fraction = wei % divisor;
 
   if (fraction === 0n) {
-    return `${whole} ETH`;
+    return `${whole} ${symbol}`;
   }
 
   const fractionStr = fraction.toString().padStart(decimals, '0');
@@ -77,8 +87,8 @@ function formatEthBalance(wei: bigint, decimals: number): string {
   const trimmed = fractionStr.slice(0, 6).replace(/0+$/, '');
 
   if (!trimmed) {
-    return `${whole} ETH`;
+    return `${whole} ${symbol}`;
   }
 
-  return `${whole}.${trimmed} ETH`;
+  return `${whole}.${trimmed} ${symbol}`;
 }

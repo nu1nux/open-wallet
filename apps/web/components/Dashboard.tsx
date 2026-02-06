@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { Button, Card, CardContent, CardHeader, CardTitle } from './ui';
 import { useWalletStore } from '@/store/wallet';
 import { useWallet } from '@/hooks/useWallet';
-import { ChainFamily } from '@open-wallet/types';
+import { ChainFamily, CHAIN_CONFIGS } from '@open-wallet/types';
+import { NetworkSelector } from './network-selector';
 
 export function Dashboard() {
-  const { accounts } = useWalletStore();
+  const { accounts, selectedEvmChainId, selectedSolanaChainId, setEvmChainId, setSolanaChainId } = useWalletStore();
   const { lockWallet, createAccount, isLoading } = useWallet();
 
   const evmAccounts = accounts.filter((a) => a.chainFamily === ChainFamily.EVM);
@@ -33,7 +34,14 @@ export function Dashboard() {
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle>Ethereum</CardTitle>
+                <div className="flex items-center gap-3">
+                  <CardTitle>EVM</CardTitle>
+                  <NetworkSelector
+                    chainFamily={ChainFamily.EVM}
+                    selectedChainId={selectedEvmChainId}
+                    onSelect={setEvmChainId}
+                  />
+                </div>
                 <Button
                   size="sm"
                   variant="ghost"
@@ -52,7 +60,11 @@ export function Dashboard() {
               ) : (
                 <div className="space-y-2">
                   {evmAccounts.map((account) => (
-                    <AccountRow key={account.address} account={account} symbol="ETH" />
+                    <AccountRow
+                      key={account.address}
+                      account={account}
+                      symbol={CHAIN_CONFIGS[selectedEvmChainId].nativeCurrency.symbol}
+                    />
                   ))}
                 </div>
               )}
@@ -63,7 +75,14 @@ export function Dashboard() {
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle>Solana</CardTitle>
+                <div className="flex items-center gap-3">
+                  <CardTitle>Solana</CardTitle>
+                  <NetworkSelector
+                    chainFamily={ChainFamily.SOLANA}
+                    selectedChainId={selectedSolanaChainId}
+                    onSelect={setSolanaChainId}
+                  />
+                </div>
                 <Button
                   size="sm"
                   variant="ghost"
@@ -82,7 +101,11 @@ export function Dashboard() {
               ) : (
                 <div className="space-y-2">
                   {solanaAccounts.map((account) => (
-                    <AccountRow key={account.address} account={account} symbol="SOL" />
+                    <AccountRow
+                      key={account.address}
+                      account={account}
+                      symbol={CHAIN_CONFIGS[selectedSolanaChainId].nativeCurrency.symbol}
+                    />
                   ))}
                 </div>
               )}

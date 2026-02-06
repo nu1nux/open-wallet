@@ -57,3 +57,8 @@ mpc-keys/
 tmp/
 temp/
 *.tmp
+
+
+/docs/plans
+
+/reviews

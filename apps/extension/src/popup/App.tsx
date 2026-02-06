@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Card, CardContent, Input, Spinner, Alert, AddressDisplay } from '../components/ui';
+import { NetworkSelector } from '../components/NetworkSelector';
+import { ChainId, ChainFamily, CHAIN_CONFIGS } from '@open-wallet/types';
 
 type View = 'loading' | 'create' | 'unlock' | 'dashboard';
 
@@ -166,13 +168,22 @@ function UnlockView({ onSuccess }: { onSuccess: () => void }) {
 }
 
 function DashboardView({ onLock }: { onLock: () => void }) {
+  const [selectedEvmChainId, setSelectedEvmChainId] = useState<ChainId>(ChainId.ETH_MAINNET);
+  const evmChain = CHAIN_CONFIGS[selectedEvmChainId];
   const mockAddress = '0x1234567890123456789012345678901234567890';
 
   return (
     <div className="flex h-full flex-col bg-neutral-50">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-neutral-200 bg-white px-4 py-3">
-        <h1 className="font-semibold text-neutral-900">Open Wallet</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="font-semibold text-neutral-900">Open Wallet</h1>
+          <NetworkSelector
+            chainFamily={ChainFamily.EVM}
+            selectedChainId={selectedEvmChainId}
+            onSelect={setSelectedEvmChainId}
+          />
+        </div>
         <Button variant="ghost" size="sm" onClick={onLock}>
           Lock
         </Button>
@@ -186,7 +197,7 @@ function DashboardView({ onLock }: { onLock: () => void }) {
 
       {/* Balance */}
       <div className="border-b border-neutral-200 bg-white px-4 py-6 text-center">
-        <div className="text-2xl font-semibold text-neutral-900">0.00 ETH</div>
+        <div className="text-2xl font-semibold text-neutral-900">0.00 {evmChain.nativeCurrency.symbol}</div>
         <div className="text-sm text-neutral-500">$0.00 USD</div>
       </div>
 

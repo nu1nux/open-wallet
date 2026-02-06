@@ -6,6 +6,7 @@ import {
   isEvmChain,
   isSolanaChain,
   getChainConfig,
+  resolveChainId,
 } from '@open-wallet/types';
 import {
   validateMnemonic,
@@ -57,7 +58,12 @@ export async function sendCommand(
       process.exit(1);
     }
 
-    const chainId = parseInt(options.chain, 10) as ChainId;
+    const chainId = resolveChainId(options.chain);
+    if (chainId === null) {
+      spinner.fail(`Unknown chain: ${options.chain}`);
+      console.error(chalk.gray('Run "open-wallet networks" to see available chains'));
+      process.exit(1);
+    }
     const accountIndex = parseInt(options.index, 10);
 
     spinner.text = 'Deriving account...';
@@ -244,7 +250,21 @@ async function sendSolanaTransferCmd(
   console.log();
 }
 
-function formatBalance(wei: bigint): string {
-  const eth = Number(wei) / 1e18;
-  return eth.toFixed(6);
+function formatBalance(wei: bigint, decimals: number = 18): string {
+  const divisor = BigInt(10 ** decimals);
+  const whole = wei / divisor;
+  const fraction = wei % divisor;
+
+  if (fraction === 0n) {
+    return whole.toString();
+  }
+
+  const fractionStr = fraction.toString().padStart(decimals, '0');
+  const trimmed = fractionStr.slice(0, 6).replace(/0+$/, '');
+
+  if (!trimmed) {
+    return whole.toString();
+  }
+
+  return `${whole}.${trimmed}`;
 }
