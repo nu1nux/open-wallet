@@ -3,8 +3,6 @@ import {
   SystemProgram,
   PublicKey,
   Keypair,
-  sendAndConfirmTransaction,
-  TransactionInstruction,
   ComputeBudgetProgram,
 } from '@solana/web3.js';
 import {
@@ -19,7 +17,7 @@ import {
   ErrorCode,
 } from '@open-wallet/types';
 import { createLogger } from '@open-wallet/utils';
-import { SolanaClient, solToLamports, lamportsToSol } from './client';
+import { SolanaClient, lamportsToSol } from './client';
 
 const logger = createLogger('chains-solana:transaction');
 

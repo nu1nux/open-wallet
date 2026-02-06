@@ -69,7 +69,7 @@ export function checkPassword(password: string): PasswordCheckResult {
   const hasLower = /[a-z]/.test(password);
   const hasUpper = /[A-Z]/.test(password);
   const hasDigit = /[0-9]/.test(password);
-  const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+  const hasSpecial = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
 
   if (hasLower) score += 10;
   if (hasUpper) score += 10;

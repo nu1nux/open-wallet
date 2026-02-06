@@ -23,7 +23,7 @@ interface Message {
   payload?: unknown;
 }
 
-interface Response {
+interface ExtensionResponse {
   success: boolean;
   data?: unknown;
   error?: string;
@@ -45,7 +45,7 @@ setInterval(() => {
 
 // Message handler
 chrome.runtime.onMessage.addListener(
-  (message: Message, _sender, sendResponse: (response: Response) => void) => {
+  (message: Message, _sender, sendResponse: (response: ExtensionResponse) => void) => {
     handleMessage(message)
       .then(sendResponse)
       .catch((error) => {
@@ -60,7 +60,7 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
-async function handleMessage(message: Message): Promise<Response> {
+async function handleMessage(message: Message): Promise<ExtensionResponse> {
   switch (message.type) {
     case 'WALLET_STATUS':
       return {

@@ -1,6 +1,6 @@
-import { pbkdf2 } from '@noble/hashes/pbkdf2';
-import { scrypt } from '@noble/hashes/scrypt';
-import { sha256 } from '@noble/hashes/sha256';
+import { pbkdf2 } from '@noble/hashes/pbkdf2.js';
+import { scrypt } from '@noble/hashes/scrypt.js';
+import { sha256 } from '@noble/hashes/sha2.js';
 
 /**
  * KDF algorithm types

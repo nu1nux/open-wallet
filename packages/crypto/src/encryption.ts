@@ -1,4 +1,4 @@
-import { gcm } from '@noble/ciphers/aes';
+import { gcm } from '@noble/ciphers/aes.js';
 import { randomBytes } from './random';
 
 /**

@@ -3,10 +3,9 @@ import ora from 'ora';
 import { password, confirm } from '@inquirer/prompts';
 import {
   ChainId,
-  getChainConfig,
   isEvmChain,
   isSolanaChain,
-  ChainFamily,
+  getChainConfig,
 } from '@open-wallet/types';
 import {
   validateMnemonic,
@@ -60,7 +59,6 @@ export async function sendCommand(
 
     const chainId = parseInt(options.chain, 10) as ChainId;
     const accountIndex = parseInt(options.index, 10);
-    const chainConfig = getChainConfig(chainId);
 
     spinner.text = 'Deriving account...';
 

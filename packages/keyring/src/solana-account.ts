@@ -1,4 +1,4 @@
-import { ed25519 } from '@noble/curves/ed25519';
+import { ed25519 } from '@noble/curves/ed25519.js';
 import { HDKey } from '@scure/bip32';
 import { Account, ChainFamily, getDerivationPath } from '@open-wallet/types';
 import { HDWallet } from './hd-wallet';

@@ -1,8 +1,7 @@
-import { sha256 as sha256Noble } from '@noble/hashes/sha256';
-import { sha512 as sha512Noble } from '@noble/hashes/sha512';
-import { keccak_256 } from '@noble/hashes/sha3';
-import { ripemd160 as ripemd160Noble } from '@noble/hashes/ripemd160';
-import { hmac } from '@noble/hashes/hmac';
+import { hmac } from '@noble/hashes/hmac.js';
+import { ripemd160 as ripemd160Noble } from '@noble/hashes/legacy.js';
+import { keccak_256 } from '@noble/hashes/sha3.js';
+import { sha256 as sha256Noble, sha512 as sha512Noble } from '@noble/hashes/sha2.js';
 
 /**
  * Compute SHA-256 hash

@@ -1,4 +1,4 @@
-import { secp256k1 } from '@noble/curves/secp256k1';
+import { secp256k1 } from '@noble/curves/secp256k1.js';
 import { HDKey } from '@scure/bip32';
 import { keccak256, checksumEvmAddress } from '@open-wallet/crypto';
 import { Account, ChainFamily, getDerivationPath } from '@open-wallet/types';
@@ -121,10 +121,13 @@ export function createEvmAccountFromPrivateKey(
  */
 export function signEvmMessage(message: Uint8Array, privateKey: Uint8Array): string {
   const messageHash = keccak256(message);
-  const signature = secp256k1.sign(messageHash, privateKey);
-  const r = signature.r.toString(16).padStart(64, '0');
-  const s = signature.s.toString(16).padStart(64, '0');
-  const v = (signature.recovery! + 27).toString(16).padStart(2, '0');
+  const signature = secp256k1.sign(messageHash, privateKey, {
+    prehash: false,
+    format: 'recovered',
+  });
+  const r = Buffer.from(signature.slice(0, 32)).toString('hex');
+  const s = Buffer.from(signature.slice(32, 64)).toString('hex');
+  const v = (signature[64] + 27).toString(16).padStart(2, '0');
   return '0x' + r + s + v;
 }
 

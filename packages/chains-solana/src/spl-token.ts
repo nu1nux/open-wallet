@@ -13,11 +13,8 @@ import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
 } from '@solana/spl-token';
 import { Token, TokenBalance, TokenStandard, Result, ok, err, ErrorCode } from '@open-wallet/types';
-import { createLogger } from '@open-wallet/utils';
 import { SolanaClient } from './client';
 import { signSolanaTransaction, sendSignedTransaction, waitForTransaction } from './transaction';
-
-const logger = createLogger('chains-solana:spl-token');
 
 /**
  * Get SPL token metadata

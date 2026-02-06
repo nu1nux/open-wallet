@@ -29,11 +29,14 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^8.2.0",
+    "@open-wallet/chains-evm": "workspace:*",
+    "@open-wallet/chains-solana": "workspace:*",
     "@open-wallet/keyring": "workspace:*",
     "@open-wallet/storage": "workspace:*",
     "@open-wallet/types": "workspace:*",
     "@open-wallet/utils": "workspace:*",
     "@open-wallet/wallet-core": "workspace:*",
+    "@solana/web3.js": "^1.98.4",
     "chalk": "^5.6.2",
     "commander": "^14.0.3",
     "ora": "^9.3.0"

@@ -55,7 +55,6 @@ const MAX_UINT256 = 2n ** 256n - 1n;
 export function checkTransaction(request: TxRequest): TransactionCheckResult {
   const warnings: string[] = [];
   const recommendations: string[] = [];
-  let risk = TransactionRisk.SAFE;
 
   if (isEvmChain(request.chainId)) {
     return checkEvmTransaction(request as EvmTxRequest);
@@ -66,7 +65,7 @@ export function checkTransaction(request: TxRequest): TransactionCheckResult {
     warnings.push(`Sending ${formatValue(request.value, request.chainId)} native tokens`);
   }
 
-  return { risk, warnings, recommendations };
+  return { risk: TransactionRisk.SAFE, warnings, recommendations };
 }
 
 /**

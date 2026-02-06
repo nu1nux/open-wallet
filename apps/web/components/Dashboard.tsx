@@ -6,7 +6,7 @@ import { useWallet } from '@/hooks/useWallet';
 import { ChainFamily } from '@open-wallet/types';
 
 export function Dashboard() {
-  const { accounts, selectedAccount, selectedChainId } = useWalletStore();
+  const { accounts } = useWalletStore();
   const { lockWallet, createAccount, isLoading } = useWallet();
 
   const evmAccounts = accounts.filter((a) => a.chainFamily === ChainFamily.EVM);

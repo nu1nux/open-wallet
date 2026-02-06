@@ -1,7 +1,6 @@
 import {
   Account,
   ChainId,
-  ChainFamily,
   CreateAccountOptions,
   IWallet,
   InitWalletOptions,
@@ -19,9 +18,9 @@ import {
   isSolanaChain,
 } from '@open-wallet/types';
 import { IStorage } from '@open-wallet/storage';
-import { Keyring, StoredKeyring } from '@open-wallet/keyring';
-import { createEvmClient, EvmClient, sendTransaction as sendEvmTx } from '@open-wallet/chains-evm';
-import { createSolanaClient, SolanaClient, sendTransfer as sendSolanaTx } from '@open-wallet/chains-solana';
+import { Keyring } from '@open-wallet/keyring';
+import { createEvmClient, EvmClient } from '@open-wallet/chains-evm';
+import { createSolanaClient, SolanaClient } from '@open-wallet/chains-solana';
 import { randomUuid } from '@open-wallet/crypto';
 import { createLogger } from '@open-wallet/utils';
 

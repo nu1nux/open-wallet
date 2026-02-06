@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import {
   Account,
-  ChainFamily,
   ChainId,
   WalletState,
 } from '@open-wallet/types';

@@ -77,7 +77,12 @@ export function isValidDerivationPath(path: string): boolean {
  * Sanitize user input string
  */
 export function sanitizeInput(input: string): string {
-  return input.trim().replace(/[\x00-\x1F\x7F]/g, '');
+  return Array.from(input.trim())
+    .filter((char) => {
+      const code = char.charCodeAt(0);
+      return code >= 0x20 && code !== 0x7f;
+    })
+    .join('');
 }
 
 /**

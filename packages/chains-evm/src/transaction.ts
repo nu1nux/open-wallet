@@ -1,14 +1,10 @@
 import {
   parseEther,
   formatEther,
-  serializeTransaction,
   keccak256,
-  Hex,
 } from 'viem';
 import { signTransaction } from 'viem/accounts';
-import { secp256k1 } from '@noble/curves/secp256k1';
 import {
-  ChainId,
   EvmTxRequest,
   SignedTransaction,
   TransactionReceipt,
@@ -87,18 +83,6 @@ export async function signEvmTransaction(
 ): Promise<Result<SignedTransaction>> {
   try {
     const pk = (privateKey.startsWith('0x') ? privateKey : `0x${privateKey}`) as `0x${string}`;
-
-    // Serialize the transaction
-    const serialized = serializeTransaction({
-      chainId: request.chainId,
-      nonce: request.nonce,
-      to: request.to as `0x${string}`,
-      value: request.value,
-      data: request.data as `0x${string}` | undefined,
-      maxFeePerGas: request.maxFeePerGas,
-      maxPriorityFeePerGas: request.maxPriorityFeePerGas,
-      gas: request.gasLimit,
-    });
 
     // Sign the transaction
     const signedTx = await signTransaction({

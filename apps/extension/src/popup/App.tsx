@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, Spinner, Alert, AddressDisplay } from '@open-wallet/ui-kit';
+import { Button, Card, CardContent, Input, Spinner, Alert, AddressDisplay } from '@open-wallet/ui-kit';
 
 type View = 'loading' | 'create' | 'unlock' | 'dashboard';
 
 export function App() {
   const [view, setView] = useState<View>('loading');
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Check if wallet exists
@@ -20,7 +19,7 @@ export function App() {
       } else {
         setView('create');
       }
-    } catch (err) {
+    } catch {
       setView('create');
     }
   };
@@ -128,7 +127,7 @@ function UnlockView({ onSuccess }: { onSuccess: () => void }) {
       // In real implementation, this would decrypt the wallet
       await new Promise((resolve) => setTimeout(resolve, 500));
       onSuccess();
-    } catch (err) {
+    } catch {
       setError('Invalid password');
     } finally {
       setIsLoading(false);

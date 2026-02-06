@@ -1,12 +1,11 @@
 import { Account, ChainFamily, Result, ok, err, ErrorCode } from '@open-wallet/types';
 import {
-  encrypt,
-  decrypt,
   encryptJson,
   decryptJson,
   deriveKey,
   KdfParams,
   KdfAlgorithm,
+  Pbkdf2Params,
   DEFAULT_PBKDF2_PARAMS,
   generateSalt,
   EncryptedData,
@@ -236,8 +235,13 @@ export class Keyring {
    */
   import(stored: StoredKeyring, password: string): Result<void> {
     try {
-      const kdfParams: KdfParams = {
-        algorithm: stored.kdf.algorithm as KdfAlgorithm,
+      const algorithm = stored.kdf.algorithm as KdfAlgorithm;
+      if (algorithm !== KdfAlgorithm.PBKDF2) {
+        return err(ErrorCode.INVALID_INPUT, `Unsupported KDF algorithm: ${algorithm}`);
+      }
+
+      const kdfParams: Pbkdf2Params = {
+        algorithm: KdfAlgorithm.PBKDF2,
         iterations: stored.kdf.iterations as number,
         salt: new Uint8Array(Buffer.from(stored.kdf.salt as string, 'base64')),
         keyLength: stored.kdf.keyLength as number,

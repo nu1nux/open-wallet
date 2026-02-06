@@ -1,7 +1,7 @@
-import { parseAbi, formatUnits, parseUnits, Hex } from 'viem';
+import { parseAbi, formatUnits, parseUnits } from 'viem';
 import { Token, TokenBalance, TokenStandard, Result, ok, err, ErrorCode } from '@open-wallet/types';
 import { EvmClient } from './client';
-import { signEvmTransaction, sendSignedTransaction, waitForTransaction } from './transaction';
+import { signEvmTransaction, sendSignedTransaction } from './transaction';
 
 /**
  * ERC-20 ABI (minimal)

@@ -24,7 +24,7 @@ export interface AddressCheckResult {
 /**
  * Known malicious addresses (example subset)
  */
-const KNOWN_MALICIOUS_ADDRESSES = new Set([
+const KNOWN_MALICIOUS_ADDRESSES = new Set<string>([
   // Example phishing addresses - in production this would be a larger list
   '0x0000000000000000000000000000000000000000',
 ]);
@@ -32,7 +32,7 @@ const KNOWN_MALICIOUS_ADDRESSES = new Set([
 /**
  * Known contract addresses that should be treated with caution
  */
-const KNOWN_RISKY_CONTRACTS = new Set([
+const KNOWN_RISKY_CONTRACTS = new Set<string>([
   // Example - in production this would include known scam contracts
 ]);
 

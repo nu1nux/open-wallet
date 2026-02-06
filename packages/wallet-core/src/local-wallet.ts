@@ -1,5 +1,4 @@
 import {
-  Account,
   ChainFamily,
   InitWalletOptions,
   Result,
@@ -27,8 +26,6 @@ import {
 import {
   buildTransferTransaction,
   signSolanaTransaction,
-  sendSignedTransaction as sendSolanaSignedTx,
-  waitForTransaction as waitSolanaTx,
 } from '@open-wallet/chains-solana';
 import { signEvmPersonalMessage } from '@open-wallet/keyring';
 import { createLogger } from '@open-wallet/utils';

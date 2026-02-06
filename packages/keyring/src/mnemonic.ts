@@ -1,5 +1,5 @@
 import * as bip39 from '@scure/bip39';
-import { wordlist } from '@scure/bip39/wordlists/english';
+import { wordlist } from '@scure/bip39/wordlists/english.js';
 import { randomBytes } from '@open-wallet/crypto';
 
 /**
@@ -122,6 +122,6 @@ export function isValidWord(word: string): boolean {
 export function getWordSuggestions(prefix: string, limit = 5): string[] {
   const normalizedPrefix = prefix.toLowerCase();
   return wordlist
-    .filter((word) => word.startsWith(normalizedPrefix))
+    .filter((word: string) => word.startsWith(normalizedPrefix))
     .slice(0, limit);
 }

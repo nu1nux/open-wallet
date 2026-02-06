@@ -44,6 +44,7 @@ function getBrowserStorage(): BrowserStorage | null {
 }
 
 // Declare browser global for Firefox
+declare const chrome: { storage: BrowserStorage } | undefined;
 declare const browser: { storage: BrowserStorage } | undefined;
 
 /**

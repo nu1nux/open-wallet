@@ -1,14 +1,10 @@
 import {
-  Account,
-  ChainFamily,
   InitWalletOptions,
   Result,
   SignedTransaction,
   TransactionReceipt,
   TxRequest,
-  WalletState,
   WalletType,
-  ok,
   err,
   ErrorCode,
 } from '@open-wallet/types';
@@ -51,13 +47,11 @@ export interface MpcWalletConfig {
  * - Party communication
  */
 export class MpcWallet extends BaseWallet {
-  private config: MpcWalletConfig | null = null;
-
   constructor(storage: IStorage) {
     super(storage, WalletType.MPC);
   }
 
-  async initialize(options: InitWalletOptions): Promise<Result<void>> {
+  async initialize(_options: InitWalletOptions): Promise<Result<void>> {
     logger.warn('MPC wallet initialization not yet implemented');
     return err(
       ErrorCode.UNKNOWN,

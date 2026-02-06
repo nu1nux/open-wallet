@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { createLocalWallet, LocalWallet } from '@open-wallet/wallet-core';
 import { createIndexedDBStorage } from '@open-wallet/storage';
-import { ChainFamily, WalletState, Account } from '@open-wallet/types';
+import { ChainFamily, WalletState } from '@open-wallet/types';
 import { useWalletStore } from '@/store/wallet';
 
 let walletInstance: LocalWallet | null = null;
