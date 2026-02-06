@@ -1,8 +1,8 @@
 import { ed25519 } from '@noble/curves/ed25519';
 import { HDKey } from '@scure/bip32';
-import { Account, ChainFamily, getDerivationPath } from '@wallet-suite/types';
+import { Account, ChainFamily, getDerivationPath } from '@open-wallet/types';
 import { HDWallet } from './hd-wallet';
-import { randomUuid } from '@wallet-suite/crypto';
+import { randomUuid } from '@open-wallet/crypto';
 
 // Base58 alphabet used by Solana
 const BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';

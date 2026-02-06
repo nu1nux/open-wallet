@@ -29,19 +29,19 @@ importers:
 
   apps/extension:
     dependencies:
-      '@wallet-suite/storage':
+      '@open-wallet/storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@wallet-suite/types':
+      '@open-wallet/types':
         specifier: workspace:*
         version: link:../../packages/types
-      '@wallet-suite/ui-kit':
+      '@open-wallet/ui-kit':
         specifier: workspace:*
         version: link:../../packages/ui-kit
-      '@wallet-suite/utils':
+      '@open-wallet/utils':
         specifier: workspace:*
         version: link:../../packages/utils
-      '@wallet-suite/wallet-core':
+      '@open-wallet/wallet-core':
         specifier: workspace:*
         version: link:../../packages/wallet-core
       react:
@@ -87,19 +87,19 @@ importers:
 
   apps/web:
     dependencies:
-      '@wallet-suite/storage':
+      '@open-wallet/storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@wallet-suite/types':
+      '@open-wallet/types':
         specifier: workspace:*
         version: link:../../packages/types
-      '@wallet-suite/ui-kit':
+      '@open-wallet/ui-kit':
         specifier: workspace:*
         version: link:../../packages/ui-kit
-      '@wallet-suite/utils':
+      '@open-wallet/utils':
         specifier: workspace:*
         version: link:../../packages/utils
-      '@wallet-suite/wallet-core':
+      '@open-wallet/wallet-core':
         specifier: workspace:*
         version: link:../../packages/wallet-core
       next:
@@ -139,16 +139,16 @@ importers:
 
   packages/chains-evm:
     dependencies:
-      '@wallet-suite/keyring':
+      '@open-wallet/keyring':
         specifier: workspace:*
         version: link:../keyring
-      '@wallet-suite/rpc':
+      '@open-wallet/rpc':
         specifier: workspace:*
         version: link:../rpc
-      '@wallet-suite/types':
+      '@open-wallet/types':
         specifier: workspace:*
         version: link:../types
-      '@wallet-suite/utils':
+      '@open-wallet/utils':
         specifier: workspace:*
         version: link:../utils
       viem:
@@ -176,13 +176,13 @@ importers:
       '@solana/web3.js':
         specifier: ^1.95.0
         version: 1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
-      '@wallet-suite/keyring':
+      '@open-wallet/keyring':
         specifier: workspace:*
         version: link:../keyring
-      '@wallet-suite/types':
+      '@open-wallet/types':
         specifier: workspace:*
         version: link:../types
-      '@wallet-suite/utils':
+      '@open-wallet/utils':
         specifier: workspace:*
         version: link:../utils
     devDependencies:
@@ -232,10 +232,10 @@ importers:
       '@scure/bip39':
         specifier: ^1.5.0
         version: 1.6.0
-      '@wallet-suite/crypto':
+      '@open-wallet/crypto':
         specifier: workspace:*
         version: link:../crypto
-      '@wallet-suite/types':
+      '@open-wallet/types':
         specifier: workspace:*
         version: link:../types
     devDependencies:
@@ -254,10 +254,10 @@ importers:
 
   packages/rpc:
     dependencies:
-      '@wallet-suite/types':
+      '@open-wallet/types':
         specifier: workspace:*
         version: link:../types
-      '@wallet-suite/utils':
+      '@open-wallet/utils':
         specifier: workspace:*
         version: link:../utils
     devDependencies:
@@ -276,13 +276,13 @@ importers:
 
   packages/security:
     dependencies:
-      '@wallet-suite/crypto':
+      '@open-wallet/crypto':
         specifier: workspace:*
         version: link:../crypto
-      '@wallet-suite/types':
+      '@open-wallet/types':
         specifier: workspace:*
         version: link:../types
-      '@wallet-suite/utils':
+      '@open-wallet/utils':
         specifier: workspace:*
         version: link:../utils
     devDependencies:
@@ -387,19 +387,19 @@ importers:
       '@inquirer/prompts':
         specifier: ^7.0.0
         version: 7.10.1(@types/node@20.19.32)
-      '@wallet-suite/keyring':
+      '@open-wallet/keyring':
         specifier: workspace:*
         version: link:../keyring
-      '@wallet-suite/storage':
+      '@open-wallet/storage':
         specifier: workspace:*
         version: link:../storage
-      '@wallet-suite/types':
+      '@open-wallet/types':
         specifier: workspace:*
         version: link:../types
-      '@wallet-suite/utils':
+      '@open-wallet/utils':
         specifier: workspace:*
         version: link:../utils
-      '@wallet-suite/wallet-core':
+      '@open-wallet/wallet-core':
         specifier: workspace:*
         version: link:../wallet-core
       chalk:
@@ -430,25 +430,25 @@ importers:
 
   packages/wallet-core:
     dependencies:
-      '@wallet-suite/chains-evm':
+      '@open-wallet/chains-evm':
         specifier: workspace:*
         version: link:../chains-evm
-      '@wallet-suite/chains-solana':
+      '@open-wallet/chains-solana':
         specifier: workspace:*
         version: link:../chains-solana
-      '@wallet-suite/crypto':
+      '@open-wallet/crypto':
         specifier: workspace:*
         version: link:../crypto
-      '@wallet-suite/keyring':
+      '@open-wallet/keyring':
         specifier: workspace:*
         version: link:../keyring
-      '@wallet-suite/storage':
+      '@open-wallet/storage':
         specifier: workspace:*
         version: link:../storage
-      '@wallet-suite/types':
+      '@open-wallet/types':
         specifier: workspace:*
         version: link:../types
-      '@wallet-suite/utils':
+      '@open-wallet/utils':
         specifier: workspace:*
         version: link:../utils
     devDependencies:

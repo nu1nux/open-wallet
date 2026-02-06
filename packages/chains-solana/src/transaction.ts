@@ -17,8 +17,8 @@ import {
   ok,
   err,
   ErrorCode,
-} from '@wallet-suite/types';
-import { createLogger } from '@wallet-suite/utils';
+} from '@open-wallet/types';
+import { createLogger } from '@open-wallet/utils';
 import { SolanaClient, solToLamports, lamportsToSol } from './client';
 
 const logger = createLogger('chains-solana:transaction');

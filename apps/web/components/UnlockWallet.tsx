@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, Alert } from '@wallet-suite/ui-kit';
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Alert } from '@open-wallet/ui-kit';
 import { useWallet } from '@/hooks/useWallet';
 
 export function UnlockWallet() {

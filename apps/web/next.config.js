@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [
-    '@wallet-suite/types',
-    '@wallet-suite/utils',
-    '@wallet-suite/storage',
-    '@wallet-suite/wallet-core',
-    '@wallet-suite/ui-kit',
+    '@open-wallet/types',
+    '@open-wallet/utils',
+    '@open-wallet/storage',
+    '@open-wallet/wallet-core',
+    '@open-wallet/ui-kit',
   ],
 };
 

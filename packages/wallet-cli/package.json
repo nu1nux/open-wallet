@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/wallet-cli",
+  "name": "@open-wallet/wallet-cli",
   "version": "0.0.1",
   "description": "Command-line wallet interface for Wallet Suite",
   "type": "module",
@@ -27,11 +27,11 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^7.0.0",
-    "@wallet-suite/keyring": "workspace:*",
-    "@wallet-suite/storage": "workspace:*",
-    "@wallet-suite/types": "workspace:*",
-    "@wallet-suite/utils": "workspace:*",
-    "@wallet-suite/wallet-core": "workspace:*",
+    "@open-wallet/keyring": "workspace:*",
+    "@open-wallet/storage": "workspace:*",
+    "@open-wallet/types": "workspace:*",
+    "@open-wallet/utils": "workspace:*",
+    "@open-wallet/wallet-core": "workspace:*",
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
     "ora": "^8.1.0"

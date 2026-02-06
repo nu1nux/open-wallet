@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import ora from 'ora';
-import { ChainId, getChainConfig, isEvmChain, isSolanaChain } from '@wallet-suite/types';
-import { createEvmClient } from '@wallet-suite/chains-evm';
-import { createSolanaClient, lamportsToSol } from '@wallet-suite/chains-solana';
+import { ChainId, getChainConfig, isEvmChain, isSolanaChain } from '@open-wallet/types';
+import { createEvmClient } from '@open-wallet/chains-evm';
+import { createSolanaClient, lamportsToSol } from '@open-wallet/chains-solana';
 
 interface BalanceOptions {
   chain: string;

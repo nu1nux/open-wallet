@@ -1,4 +1,4 @@
-import { checksumEvmAddress, isValidChecksumAddress } from '@wallet-suite/crypto';
+import { checksumEvmAddress, isValidChecksumAddress } from '@open-wallet/crypto';
 
 /**
  * Address risk level

@@ -14,7 +14,7 @@
 - [x] .prettierrc
 
 ### Level 0 Packages (No Dependencies)
-- [x] @wallet-suite/types
+- [x] @open-wallet/types
   - [x] ChainId enum
   - [x] Chain configurations
   - [x] Account types
@@ -22,7 +22,7 @@
   - [x] Result type (Ok/Err)
   - [x] Token types
 
-- [x] @wallet-suite/utils
+- [x] @open-wallet/utils
   - [x] Logger
   - [x] Assert utilities
   - [x] Retry with backoff
@@ -31,51 +31,51 @@
   - [x] Validation utilities
 
 ### Level 1 Packages
-- [x] @wallet-suite/crypto
+- [x] @open-wallet/crypto
   - [x] KDF (PBKDF2, Scrypt)
   - [x] AES-256-GCM encryption
   - [x] Hashing (SHA-256, Keccak-256)
   - [x] Secure random
 
-- [x] @wallet-suite/storage
+- [x] @open-wallet/storage
   - [x] Storage interface
   - [x] Memory storage
   - [x] IndexedDB storage
   - [x] Extension storage
 
 ### Level 2 Packages
-- [x] @wallet-suite/keyring
+- [x] @open-wallet/keyring
   - [x] Mnemonic generation
   - [x] HD derivation
   - [x] EVM accounts
   - [x] Solana accounts
   - [x] Keyring manager
 
-- [x] @wallet-suite/rpc
+- [x] @open-wallet/rpc
   - [x] RPC client
   - [x] Health checking
   - [x] Failover support
   - [x] Rate limiting
 
 ### Level 3 Packages
-- [x] @wallet-suite/chains-evm
+- [x] @open-wallet/chains-evm
   - [x] EVM client (viem)
   - [x] Transaction building
   - [x] Gas estimation
   - [x] ERC-20 support
 
-- [x] @wallet-suite/chains-solana
+- [x] @open-wallet/chains-solana
   - [x] Solana client
   - [x] Transaction building
   - [x] SPL token support
 
 ### Level 4 Packages
-- [x] @wallet-suite/wallet-core
+- [x] @open-wallet/wallet-core
   - [x] Base wallet interface
   - [x] Local wallet implementation
   - [x] MPC wallet stub
 
-- [x] @wallet-suite/security
+- [x] @open-wallet/security
   - [x] Threat model
   - [x] Password checker
   - [x] Address checker
@@ -83,13 +83,13 @@
   - [x] Audit logging
 
 ### Level 5 Packages
-- [x] @wallet-suite/wallet-cli
+- [x] @open-wallet/wallet-cli
   - [x] Generate command
   - [x] Derive command
   - [x] Balance command
   - [x] Send command
 
-- [x] @wallet-suite/ui-kit
+- [x] @open-wallet/ui-kit
   - [x] Button component
   - [x] Card component
   - [x] Input component
@@ -101,7 +101,7 @@
 
 ## Phase 2: Applications
 
-### Web App (@wallet-suite/web)
+### Web App (@open-wallet/web)
 - [x] Next.js 14 setup
 - [x] Tailwind CSS
 - [x] App router
@@ -111,7 +111,7 @@
 - [x] UnlockWallet component
 - [x] Dashboard component
 
-### Browser Extension (@wallet-suite/extension)
+### Browser Extension (@open-wallet/extension)
 - [x] Vite + CRXJS setup
 - [x] Manifest V3
 - [x] Popup UI

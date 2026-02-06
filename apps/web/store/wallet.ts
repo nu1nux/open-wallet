@@ -5,7 +5,7 @@ import {
   ChainFamily,
   ChainId,
   WalletState,
-} from '@wallet-suite/types';
+} from '@open-wallet/types';
 
 interface WalletStore {
   // State

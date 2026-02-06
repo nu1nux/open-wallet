@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import ora from 'ora';
-import { generateMnemonic, MnemonicWordCount, validateMnemonic } from '@wallet-suite/keyring';
+import { generateMnemonic, MnemonicWordCount, validateMnemonic } from '@open-wallet/keyring';
 
 interface GenerateOptions {
   words: string;

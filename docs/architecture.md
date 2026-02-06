@@ -54,28 +54,28 @@ Wallet Suite is a modular, multi-chain cryptocurrency wallet built as a pnpm mon
 ## Package Dependencies
 
 ### Layer 0: Foundation
-- **@wallet-suite/types** - TypeScript types, enums, interfaces
-- **@wallet-suite/utils** - Logging, retry, timing, validation utilities
+- **@open-wallet/types** - TypeScript types, enums, interfaces
+- **@open-wallet/utils** - Logging, retry, timing, validation utilities
 
 ### Layer 1: Infrastructure
-- **@wallet-suite/crypto** - Encryption, KDF, hashing (uses @noble/*)
-- **@wallet-suite/storage** - Storage abstraction (IndexedDB, extension)
+- **@open-wallet/crypto** - Encryption, KDF, hashing (uses @noble/*)
+- **@open-wallet/storage** - Storage abstraction (IndexedDB, extension)
 
 ### Layer 2: Key Management
-- **@wallet-suite/keyring** - HD derivation, account management (uses @scure/*)
-- **@wallet-suite/rpc** - RPC client with failover and rate limiting
+- **@open-wallet/keyring** - HD derivation, account management (uses @scure/*)
+- **@open-wallet/rpc** - RPC client with failover and rate limiting
 
 ### Layer 3: Chain Support
-- **@wallet-suite/chains-evm** - EVM transaction support (uses viem)
-- **@wallet-suite/chains-solana** - Solana transaction support (uses @solana/web3.js)
+- **@open-wallet/chains-evm** - EVM transaction support (uses viem)
+- **@open-wallet/chains-solana** - Solana transaction support (uses @solana/web3.js)
 
 ### Layer 4: Wallet Core
-- **@wallet-suite/wallet-core** - Unified wallet interface
-- **@wallet-suite/security** - Security utilities and checks
+- **@open-wallet/wallet-core** - Unified wallet interface
+- **@open-wallet/security** - Security utilities and checks
 
 ### Layer 5: Interface
-- **@wallet-suite/wallet-cli** - Command-line interface
-- **@wallet-suite/ui-kit** - React UI components
+- **@open-wallet/wallet-cli** - Command-line interface
+- **@open-wallet/ui-kit** - React UI components
 
 ## Key Design Decisions
 

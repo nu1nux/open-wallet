@@ -1,7 +1,7 @@
 'use client';
 
 import { useWalletStore } from '@/store/wallet';
-import { WalletState } from '@wallet-suite/types';
+import { WalletState } from '@open-wallet/types';
 import { CreateWallet } from '@/components/CreateWallet';
 import { UnlockWallet } from '@/components/UnlockWallet';
 import { Dashboard } from '@/components/Dashboard';

@@ -1,6 +1,6 @@
 import * as bip39 from '@scure/bip39';
 import { wordlist } from '@scure/bip39/wordlists/english';
-import { randomBytes } from '@wallet-suite/crypto';
+import { randomBytes } from '@open-wallet/crypto';
 
 /**
  * Mnemonic word counts and their corresponding entropy bits

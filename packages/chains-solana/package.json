@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/chains-solana",
+  "name": "@open-wallet/chains-solana",
   "version": "0.0.1",
   "description": "Solana chain support for Wallet Suite",
   "type": "module",
@@ -24,9 +24,9 @@
   "dependencies": {
     "@solana/spl-token": "^0.4.9",
     "@solana/web3.js": "^1.95.0",
-    "@wallet-suite/keyring": "workspace:*",
-    "@wallet-suite/types": "workspace:*",
-    "@wallet-suite/utils": "workspace:*"
+    "@open-wallet/keyring": "workspace:*",
+    "@open-wallet/types": "workspace:*",
+    "@open-wallet/utils": "workspace:*"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.0.0",

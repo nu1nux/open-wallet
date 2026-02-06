@@ -1,9 +1,9 @@
 'use client';
 
-import { Button, Card, CardContent, CardHeader, CardTitle, AddressDisplay, Balance } from '@wallet-suite/ui-kit';
+import { Button, Card, CardContent, CardHeader, CardTitle, AddressDisplay, Balance } from '@open-wallet/ui-kit';
 import { useWalletStore } from '@/store/wallet';
 import { useWallet } from '@/hooks/useWallet';
-import { ChainFamily } from '@wallet-suite/types';
+import { ChainFamily } from '@open-wallet/types';
 
 export function Dashboard() {
   const { accounts, selectedAccount, selectedChainId } = useWalletStore();

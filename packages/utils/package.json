@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/utils",
+  "name": "@open-wallet/utils",
   "version": "0.0.1",
   "description": "Utility functions for Wallet Suite",
   "type": "module",

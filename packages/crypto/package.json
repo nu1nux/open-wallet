@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/crypto",
+  "name": "@open-wallet/crypto",
   "version": "0.0.1",
   "description": "Cryptographic primitives for Wallet Suite",
   "type": "module",

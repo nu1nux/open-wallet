@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/extension",
+  "name": "@open-wallet/extension",
   "version": "0.0.1",
   "private": true,
   "description": "Wallet Suite Browser Extension",
@@ -13,11 +13,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@wallet-suite/storage": "workspace:*",
-    "@wallet-suite/types": "workspace:*",
-    "@wallet-suite/ui-kit": "workspace:*",
-    "@wallet-suite/utils": "workspace:*",
-    "@wallet-suite/wallet-core": "workspace:*",
+    "@open-wallet/storage": "workspace:*",
+    "@open-wallet/types": "workspace:*",
+    "@open-wallet/ui-kit": "workspace:*",
+    "@open-wallet/utils": "workspace:*",
+    "@open-wallet/wallet-core": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^5.0.0"

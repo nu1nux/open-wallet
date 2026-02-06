@@ -1,4 +1,4 @@
-import { createLogger } from '@wallet-suite/utils';
+import { createLogger } from '@open-wallet/utils';
 import { RpcEndpoint, EndpointHealth } from './types';
 
 const logger = createLogger('rpc:health');

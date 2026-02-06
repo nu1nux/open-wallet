@@ -1,4 +1,4 @@
-import { Account, ChainFamily, Result, ok, err, ErrorCode } from '@wallet-suite/types';
+import { Account, ChainFamily, Result, ok, err, ErrorCode } from '@open-wallet/types';
 import {
   encrypt,
   decrypt,
@@ -10,7 +10,7 @@ import {
   DEFAULT_PBKDF2_PARAMS,
   generateSalt,
   EncryptedData,
-} from '@wallet-suite/crypto';
+} from '@open-wallet/crypto';
 import { HDWallet } from './hd-wallet';
 import { createEvmAccountFromHDKey, EvmAccountWithKey } from './evm-account';
 import { createSolanaAccountFromHDKey, SolanaAccountWithKey } from './solana-account';

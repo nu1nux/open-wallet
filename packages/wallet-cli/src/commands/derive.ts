@@ -5,8 +5,8 @@ import {
   validateMnemonic,
   createEvmAccountFromMnemonic,
   createSolanaAccountFromMnemonic,
-} from '@wallet-suite/keyring';
-import { ChainFamily } from '@wallet-suite/types';
+} from '@open-wallet/keyring';
+import { ChainFamily } from '@open-wallet/types';
 
 interface DeriveOptions {
   mnemonic?: string;

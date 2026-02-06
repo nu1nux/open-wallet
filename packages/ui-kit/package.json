@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/ui-kit",
+  "name": "@open-wallet/ui-kit",
   "version": "0.0.1",
   "description": "React UI components for Wallet Suite",
   "type": "module",

@@ -20,11 +20,11 @@ echo "✓ Solana Test Validator is running"
 # Generate a test wallet
 echo ""
 echo "Generating test wallet..."
-RESULT=$(pnpm --filter @wallet-suite/wallet-cli dev -- generate --words 12 --json 2>/dev/null)
+RESULT=$(pnpm --filter @open-wallet/wallet-cli dev -- generate --words 12 --json 2>/dev/null)
 MNEMONIC=$(echo "$RESULT" | grep -o '"mnemonic":"[^"]*"' | cut -d'"' -f4)
 
 # Derive Solana address
-DERIVE_RESULT=$(WALLET_MNEMONIC="$MNEMONIC" pnpm --filter @wallet-suite/wallet-cli dev -- derive --chain solana --json 2>/dev/null)
+DERIVE_RESULT=$(WALLET_MNEMONIC="$MNEMONIC" pnpm --filter @open-wallet/wallet-cli dev -- derive --chain solana --json 2>/dev/null)
 ADDRESS=$(echo "$DERIVE_RESULT" | grep -o '"address":"[^"]*"' | head -1 | cut -d'"' -f4)
 
 echo "Test address: $ADDRESS"
@@ -32,7 +32,7 @@ echo "Test address: $ADDRESS"
 # Check balance (should be 0 for new address)
 echo ""
 echo "Checking balance on local network..."
-BALANCE=$(pnpm --filter @wallet-suite/wallet-cli dev -- balance "$ADDRESS" --chain 104 --json 2>/dev/null)
+BALANCE=$(pnpm --filter @open-wallet/wallet-cli dev -- balance "$ADDRESS" --chain 104 --json 2>/dev/null)
 
 if echo "$BALANCE" | grep -q "balance"; then
     echo "✓ Balance check: PASS"

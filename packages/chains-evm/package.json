@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/chains-evm",
+  "name": "@open-wallet/chains-evm",
   "version": "0.0.1",
   "description": "EVM chain support for Wallet Suite",
   "type": "module",
@@ -22,10 +22,10 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@wallet-suite/keyring": "workspace:*",
-    "@wallet-suite/rpc": "workspace:*",
-    "@wallet-suite/types": "workspace:*",
-    "@wallet-suite/utils": "workspace:*",
+    "@open-wallet/keyring": "workspace:*",
+    "@open-wallet/rpc": "workspace:*",
+    "@open-wallet/types": "workspace:*",
+    "@open-wallet/utils": "workspace:*",
     "viem": "^2.21.0"
   },
   "devDependencies": {

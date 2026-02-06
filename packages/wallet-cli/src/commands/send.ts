@@ -7,24 +7,24 @@ import {
   isEvmChain,
   isSolanaChain,
   ChainFamily,
-} from '@wallet-suite/types';
+} from '@open-wallet/types';
 import {
   validateMnemonic,
   createEvmAccountFromMnemonic,
   createSolanaAccountFromMnemonic,
-} from '@wallet-suite/keyring';
+} from '@open-wallet/keyring';
 import {
   createEvmClient,
   sendTransaction as sendEvmTransaction,
   parseEthAmount,
-} from '@wallet-suite/chains-evm';
+} from '@open-wallet/chains-evm';
 import {
   createSolanaClient,
   sendTransfer as sendSolanaTransfer,
   solToLamports,
-} from '@wallet-suite/chains-solana';
+} from '@open-wallet/chains-solana';
 import { Keypair } from '@solana/web3.js';
-import { decodeBase58 } from '@wallet-suite/keyring';
+import { decodeBase58 } from '@open-wallet/keyring';
 
 interface SendOptions {
   mnemonic?: string;

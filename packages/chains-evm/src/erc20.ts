@@ -1,5 +1,5 @@
 import { parseAbi, formatUnits, parseUnits, Hex } from 'viem';
-import { Token, TokenBalance, TokenStandard, Result, ok, err, ErrorCode } from '@wallet-suite/types';
+import { Token, TokenBalance, TokenStandard, Result, ok, err, ErrorCode } from '@open-wallet/types';
 import { EvmClient } from './client';
 import { signEvmTransaction, sendSignedTransaction, waitForTransaction } from './transaction';
 

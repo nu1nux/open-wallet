@@ -10,7 +10,7 @@ echo "========================================"
 echo ""
 
 echo "Building extension..."
-pnpm --filter @wallet-suite/extension build
+pnpm --filter @open-wallet/extension build
 
 if [ -d "apps/extension/dist" ]; then
     echo ""

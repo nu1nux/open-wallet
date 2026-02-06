@@ -1,4 +1,4 @@
-import { ChainId, EvmTxRequest, TxRequest, isEvmChain } from '@wallet-suite/types';
+import { ChainId, EvmTxRequest, TxRequest, isEvmChain } from '@open-wallet/types';
 
 /**
  * Transaction risk level

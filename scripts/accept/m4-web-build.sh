@@ -10,7 +10,7 @@ echo "========================================"
 echo ""
 
 echo "Building web app..."
-pnpm --filter @wallet-suite/web build
+pnpm --filter @open-wallet/web build
 
 if [ -d "apps/web/.next" ]; then
     echo ""

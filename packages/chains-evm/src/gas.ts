@@ -1,5 +1,5 @@
 import { formatGwei, parseGwei } from 'viem';
-import { GasEstimate, Result, ok, err, ErrorCode } from '@wallet-suite/types';
+import { GasEstimate, Result, ok, err, ErrorCode } from '@open-wallet/types';
 import { EvmClient } from './client';
 
 /**

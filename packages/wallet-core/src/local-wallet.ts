@@ -15,23 +15,23 @@ import {
   isSolanaChain,
   EvmTxRequest,
   SolanaTxRequest,
-} from '@wallet-suite/types';
-import { IStorage } from '@wallet-suite/storage';
-import { StoredKeyring, MnemonicWordCount } from '@wallet-suite/keyring';
+} from '@open-wallet/types';
+import { IStorage } from '@open-wallet/storage';
+import { StoredKeyring, MnemonicWordCount } from '@open-wallet/keyring';
 import {
   signEvmTransaction,
   sendSignedTransaction as sendEvmSignedTx,
   waitForTransaction as waitEvmTx,
   buildTransaction as buildEvmTx,
-} from '@wallet-suite/chains-evm';
+} from '@open-wallet/chains-evm';
 import {
   buildTransferTransaction,
   signSolanaTransaction,
   sendSignedTransaction as sendSolanaSignedTx,
   waitForTransaction as waitSolanaTx,
-} from '@wallet-suite/chains-solana';
-import { signEvmPersonalMessage } from '@wallet-suite/keyring';
-import { createLogger } from '@wallet-suite/utils';
+} from '@open-wallet/chains-solana';
+import { signEvmPersonalMessage } from '@open-wallet/keyring';
+import { createLogger } from '@open-wallet/utils';
 import { BaseWallet } from './wallet';
 
 const logger = createLogger('local-wallet');
@@ -164,7 +164,7 @@ export class LocalWallet extends BaseWallet {
       }
 
       // Decode the secret seed and create keypair
-      const { decodeBase58 } = await import('@wallet-suite/keyring');
+      const { decodeBase58 } = await import('@open-wallet/keyring');
       const { Keypair } = await import('@solana/web3.js');
 
       const secretSeed = decodeBase58((account as { secretSeed: string }).secretSeed);
@@ -194,7 +194,7 @@ export class LocalWallet extends BaseWallet {
       const signature = signEvmPersonalMessage(message, privateKeyBytes);
       return ok(signature);
     } else if (account.chainFamily === ChainFamily.SOLANA) {
-      const { signSolanaMessage, decodeBase58 } = await import('@wallet-suite/keyring');
+      const { signSolanaMessage, decodeBase58 } = await import('@open-wallet/keyring');
       const messageBytes = new TextEncoder().encode(message);
       const seed = decodeBase58((account as { secretSeed: string }).secretSeed);
       const signature = signSolanaMessage(messageBytes, seed);
@@ -237,9 +237,9 @@ export class LocalWallet extends BaseWallet {
       return waitEvmTx(client, sendResult.value);
     } else if (isSolanaChain(request.chainId)) {
       const client = this.getSolanaClient(request.chainId);
-      const { decodeBase58 } = await import('@wallet-suite/keyring');
+      const { decodeBase58 } = await import('@open-wallet/keyring');
       const { Keypair } = await import('@solana/web3.js');
-      const { sendTransfer } = await import('@wallet-suite/chains-solana');
+      const { sendTransfer } = await import('@open-wallet/chains-solana');
 
       const seed = decodeBase58((account as { secretSeed: string }).secretSeed);
       const keypair = Keypair.fromSeed(seed);
@@ -264,7 +264,7 @@ export class LocalWallet extends BaseWallet {
     }
 
     // Try to unlock with current password
-    const tempKeyring = new (await import('@wallet-suite/keyring')).Keyring();
+    const tempKeyring = new (await import('@open-wallet/keyring')).Keyring();
     const result = tempKeyring.import(stored, currentPassword);
     if (!result.ok) {
       return err(ErrorCode.UNAUTHORIZED, 'Invalid current password');

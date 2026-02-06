@@ -1,5 +1,5 @@
-import { Result, ok, err, ErrorCode } from '@wallet-suite/types';
-import { createLogger, RateLimiter, retry, RetryConfig } from '@wallet-suite/utils';
+import { Result, ok, err, ErrorCode } from '@open-wallet/types';
+import { createLogger, RateLimiter, retry, RetryConfig } from '@open-wallet/utils';
 import {
   RpcClientConfig,
   RpcEndpoint,

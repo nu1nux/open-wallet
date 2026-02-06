@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/storage",
+  "name": "@open-wallet/storage",
   "version": "0.0.1",
   "description": "Storage abstraction for Wallet Suite",
   "type": "module",

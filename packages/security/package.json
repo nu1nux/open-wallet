@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/security",
+  "name": "@open-wallet/security",
   "version": "0.0.1",
   "description": "Security utilities for Wallet Suite",
   "type": "module",
@@ -22,9 +22,9 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@wallet-suite/crypto": "workspace:*",
-    "@wallet-suite/types": "workspace:*",
-    "@wallet-suite/utils": "workspace:*"
+    "@open-wallet/crypto": "workspace:*",
+    "@open-wallet/types": "workspace:*",
+    "@open-wallet/utils": "workspace:*"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.0.0",

@@ -1,4 +1,4 @@
-import { createLogger } from '@wallet-suite/utils';
+import { createLogger } from '@open-wallet/utils';
 
 const logger = createLogger('audit');
 

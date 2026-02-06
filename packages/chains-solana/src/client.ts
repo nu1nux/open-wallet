@@ -6,8 +6,8 @@ import {
   Commitment,
   LAMPORTS_PER_SOL,
 } from '@solana/web3.js';
-import { ChainId, getChainConfig } from '@wallet-suite/types';
-import { decodeBase58 } from '@wallet-suite/keyring';
+import { ChainId, getChainConfig } from '@open-wallet/types';
+import { decodeBase58 } from '@open-wallet/keyring';
 
 /**
  * Map ChainId to Solana cluster

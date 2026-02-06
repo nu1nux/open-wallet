@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/types",
+  "name": "@open-wallet/types",
   "version": "0.0.1",
   "description": "Shared TypeScript types for Wallet Suite",
   "type": "module",

@@ -17,13 +17,13 @@ import {
   ErrorCode,
   isEvmChain,
   isSolanaChain,
-} from '@wallet-suite/types';
-import { IStorage } from '@wallet-suite/storage';
-import { Keyring, StoredKeyring } from '@wallet-suite/keyring';
-import { createEvmClient, EvmClient, sendTransaction as sendEvmTx } from '@wallet-suite/chains-evm';
-import { createSolanaClient, SolanaClient, sendTransfer as sendSolanaTx } from '@wallet-suite/chains-solana';
-import { randomUuid } from '@wallet-suite/crypto';
-import { createLogger } from '@wallet-suite/utils';
+} from '@open-wallet/types';
+import { IStorage } from '@open-wallet/storage';
+import { Keyring, StoredKeyring } from '@open-wallet/keyring';
+import { createEvmClient, EvmClient, sendTransaction as sendEvmTx } from '@open-wallet/chains-evm';
+import { createSolanaClient, SolanaClient, sendTransfer as sendSolanaTx } from '@open-wallet/chains-solana';
+import { randomUuid } from '@open-wallet/crypto';
+import { createLogger } from '@open-wallet/utils';
 
 const logger = createLogger('wallet-core');
 

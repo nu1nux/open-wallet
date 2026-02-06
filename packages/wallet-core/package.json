@@ -1,5 +1,5 @@
 {
-  "name": "@wallet-suite/wallet-core",
+  "name": "@open-wallet/wallet-core",
   "version": "0.0.1",
   "description": "Core wallet implementation for Wallet Suite",
   "type": "module",
@@ -22,13 +22,13 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@wallet-suite/chains-evm": "workspace:*",
-    "@wallet-suite/chains-solana": "workspace:*",
-    "@wallet-suite/crypto": "workspace:*",
-    "@wallet-suite/keyring": "workspace:*",
-    "@wallet-suite/storage": "workspace:*",
-    "@wallet-suite/types": "workspace:*",
-    "@wallet-suite/utils": "workspace:*"
+    "@open-wallet/chains-evm": "workspace:*",
+    "@open-wallet/chains-solana": "workspace:*",
+    "@open-wallet/crypto": "workspace:*",
+    "@open-wallet/keyring": "workspace:*",
+    "@open-wallet/storage": "workspace:*",
+    "@open-wallet/types": "workspace:*",
+    "@open-wallet/utils": "workspace:*"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.0.0",

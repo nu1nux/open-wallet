@@ -1,9 +1,9 @@
 import { secp256k1 } from '@noble/curves/secp256k1';
 import { HDKey } from '@scure/bip32';
-import { keccak256, checksumEvmAddress } from '@wallet-suite/crypto';
-import { Account, ChainFamily, getDerivationPath } from '@wallet-suite/types';
+import { keccak256, checksumEvmAddress } from '@open-wallet/crypto';
+import { Account, ChainFamily, getDerivationPath } from '@open-wallet/types';
 import { HDWallet } from './hd-wallet';
-import { randomUuid } from '@wallet-suite/crypto';
+import { randomUuid } from '@open-wallet/crypto';
 
 /**
  * EVM account with private key access

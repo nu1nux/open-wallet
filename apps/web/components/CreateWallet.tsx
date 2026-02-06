@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, Alert } from '@wallet-suite/ui-kit';
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Alert } from '@open-wallet/ui-kit';
 import { useWallet } from '@/hooks/useWallet';
-import { checkPassword } from '@wallet-suite/security';
+import { checkPassword } from '@open-wallet/security';
 
 export function CreateWallet() {
   const [password, setPassword] = useState('');

@@ -23,7 +23,7 @@ echo "✓ Anvil is running"
 
 echo ""
 echo "Checking balance on local network..."
-BALANCE=$(pnpm --filter @wallet-suite/wallet-cli dev -- balance 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --chain 31337 --json 2>/dev/null)
+BALANCE=$(pnpm --filter @open-wallet/wallet-cli dev -- balance 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --chain 31337 --json 2>/dev/null)
 
 if echo "$BALANCE" | grep -q "balance"; then
     echo "✓ Balance check: PASS"
@@ -39,4 +39,4 @@ echo "  M2 EVM Local Transfer: PASSED"
 echo "========================================"
 echo ""
 echo "Note: Full transfer test requires interactive confirmation"
-echo "Run manually: pnpm --filter @wallet-suite/wallet-cli dev -- send <to> 0.1 --chain 31337 --dry-run"
+echo "Run manually: pnpm --filter @open-wallet/wallet-cli dev -- send <to> 0.1 --chain 31337 --dry-run"

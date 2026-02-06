@@ -11,7 +11,7 @@ import {
 } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { mainnet, sepolia, polygon, arbitrum, optimism, base, avalanche, bsc } from 'viem/chains';
-import { ChainId, getChainConfig } from '@wallet-suite/types';
+import { ChainId, getChainConfig } from '@open-wallet/types';
 
 /**
  * Map ChainId to viem chain

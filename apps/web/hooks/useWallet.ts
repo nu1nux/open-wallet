@@ -1,9 +1,9 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { createLocalWallet, LocalWallet } from '@wallet-suite/wallet-core';
-import { createIndexedDBStorage } from '@wallet-suite/storage';
-import { ChainFamily, WalletState, Account } from '@wallet-suite/types';
+import { createLocalWallet, LocalWallet } from '@open-wallet/wallet-core';
+import { createIndexedDBStorage } from '@open-wallet/storage';
+import { ChainFamily, WalletState, Account } from '@open-wallet/types';
 import { useWalletStore } from '@/store/wallet';
 
 let walletInstance: LocalWallet | null = null;

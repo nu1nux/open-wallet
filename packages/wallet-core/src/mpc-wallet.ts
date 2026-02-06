@@ -11,9 +11,9 @@ import {
   ok,
   err,
   ErrorCode,
-} from '@wallet-suite/types';
-import { IStorage } from '@wallet-suite/storage';
-import { createLogger } from '@wallet-suite/utils';
+} from '@open-wallet/types';
+import { IStorage } from '@open-wallet/storage';
+import { createLogger } from '@open-wallet/utils';
 import { BaseWallet } from './wallet';
 
 const logger = createLogger('mpc-wallet');

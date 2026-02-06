@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, Spinner, Alert, AddressDisplay } from '@wallet-suite/ui-kit';
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Spinner, Alert, AddressDisplay } from '@open-wallet/ui-kit';
 
 type View = 'loading' | 'create' | 'unlock' | 'dashboard';
 
