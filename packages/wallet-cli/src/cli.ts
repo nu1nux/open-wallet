@@ -58,6 +58,10 @@ program.exitOverride();
 try {
   program.parse();
 } catch (error) {
+  // Commander throws when displaying help/version - not an actual error
+  if (error instanceof Error && error.message === '(outputHelp)') {
+    process.exit(0);
+  }
   if (error instanceof Error) {
     console.error(chalk.red(`Error: ${error.message}`));
   }
