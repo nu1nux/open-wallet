@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Card, CardContent, Input, Spinner, Alert, AddressDisplay } from '../components/ui';
+import { Button, Card, CardContent, Form, Field, Spinner, Alert, AddressDisplay } from '../components/ui';
 import { NetworkSelector } from '../components/NetworkSelector';
 import { ChainId, ChainFamily, CHAIN_CONFIGS } from '@open-wallet/types';
 
@@ -50,7 +50,9 @@ function CreateView({ onSuccess }: { onSuccess: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleCreate = async () => {
+  const handleCreate = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
@@ -81,33 +83,45 @@ function CreateView({ onSuccess }: { onSuccess: () => void }) {
       </div>
 
       <Card className="flex-1">
-        <CardContent className="space-y-4">
-          <Input
-            label="Password"
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <CardContent>
+          <Form onSubmit={handleCreate}>
+            <Field name="password">
+              <Field.Label>Password</Field.Label>
+              <Field.Control
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Field>
 
-          <Input
-            label="Confirm Password"
-            type="password"
-            placeholder="Confirm password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+            <Field
+              name="confirmPassword"
+              invalid={!!confirmPassword && password !== confirmPassword}
+            >
+              <Field.Label>Confirm Password</Field.Label>
+              <Field.Control
+                type="password"
+                placeholder="Confirm password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              {confirmPassword && password !== confirmPassword && (
+                <Field.Error>Passwords do not match</Field.Error>
+              )}
+            </Field>
 
-          {error && <Alert variant="error">{error}</Alert>}
+            {error && <Alert variant="error">{error}</Alert>}
 
-          <Button
-            fullWidth
-            onClick={handleCreate}
-            isLoading={isLoading}
-            disabled={!password || !confirmPassword}
-          >
-            Create Wallet
-          </Button>
+            <Button
+              type="submit"
+              fullWidth
+              isLoading={isLoading}
+              disabled={!password || !confirmPassword}
+            >
+              Create Wallet
+            </Button>
+          </Form>
         </CardContent>
       </Card>
     </div>
@@ -119,7 +133,9 @@ function UnlockView({ onSuccess }: { onSuccess: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleUnlock = async () => {
+  const handleUnlock = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     setIsLoading(true);
     setError(null);
 
@@ -141,26 +157,30 @@ function UnlockView({ onSuccess }: { onSuccess: () => void }) {
       </div>
 
       <Card className="flex-1">
-        <CardContent className="space-y-4">
-          <Input
-            label="Password"
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoFocus
-          />
+        <CardContent>
+          <Form onSubmit={handleUnlock}>
+            <Field name="password">
+              <Field.Label>Password</Field.Label>
+              <Field.Control
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoFocus
+              />
+            </Field>
 
-          {error && <Alert variant="error">{error}</Alert>}
+            {error && <Alert variant="error">{error}</Alert>}
 
-          <Button
-            fullWidth
-            onClick={handleUnlock}
-            isLoading={isLoading}
-            disabled={!password}
-          >
-            Unlock
-          </Button>
+            <Button
+              type="submit"
+              fullWidth
+              isLoading={isLoading}
+              disabled={!password}
+            >
+              Unlock
+            </Button>
+          </Form>
         </CardContent>
       </Card>
     </div>

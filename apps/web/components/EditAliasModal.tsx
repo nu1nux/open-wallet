@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button, Input, Alert, Modal } from './ui';
+import { Button, Form, Field, Alert, Modal } from './ui';
 import { useWallet } from '@/hooks/useWallet';
 
 interface EditAliasModalProps {
@@ -42,15 +42,17 @@ export function EditAliasModal({ isOpen, onClose, onSuccess, currentAlias }: Edi
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="Edit Alias">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <Input
-          label="Wallet Alias"
-          placeholder="main-wallet"
-          value={alias}
-          onChange={(e) => setAlias(e.target.value)}
-          disabled={isLoading}
-          hint="Leave empty to remove the alias"
-        />
+      <Form onSubmit={handleSubmit}>
+        <Field name="alias">
+          <Field.Label>Wallet Alias</Field.Label>
+          <Field.Control
+            placeholder="main-wallet"
+            value={alias}
+            onChange={(e) => setAlias(e.target.value)}
+            disabled={isLoading}
+          />
+          <Field.Description>Leave empty to remove the alias</Field.Description>
+        </Field>
 
         {error && <Alert variant="error">{error}</Alert>}
 
@@ -62,7 +64,7 @@ export function EditAliasModal({ isOpen, onClose, onSuccess, currentAlias }: Edi
             Save
           </Button>
         </div>
-      </form>
+      </Form>
     </Modal>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Card, CardContent, Input, Alert } from './ui';
+import { Button, Card, CardContent, Form, Field, Alert } from './ui';
 import { useWallet } from '@/hooks/useWallet';
 import { checkPassword } from '@open-wallet/security';
 
@@ -61,35 +61,44 @@ export function CreateWallet() {
 
         <Card padding="lg">
           <CardContent>
-            <form
+            <Form
               onSubmit={(e) => {
                 e.preventDefault();
                 handleCreate();
               }}
-              className="space-y-4"
             >
-              <Input
-                label="Wallet Name (optional)"
-                placeholder="My Wallet"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <Input
-                label="Wallet Alias (optional)"
-                placeholder="Main Wallet"
-                value={alias}
-                onChange={(e) => setAlias(e.target.value)}
-              />
+              <Field name="name">
+                <Field.Label>Wallet Name (optional)</Field.Label>
+                <Field.Control
+                  placeholder="My Wallet"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Field>
 
-              <div>
-                <Input
-                  label="Password"
+              <Field name="alias">
+                <Field.Label>Wallet Alias (optional)</Field.Label>
+                <Field.Control
+                  placeholder="Main Wallet"
+                  value={alias}
+                  onChange={(e) => setAlias(e.target.value)}
+                />
+              </Field>
+
+              <Field
+                name="password"
+                invalid={!!password && !passwordCheck.isAcceptable}
+              >
+                <Field.Label>Password</Field.Label>
+                <Field.Control
                   type="password"
                   placeholder="Enter a strong password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  error={password && !passwordCheck.isAcceptable ? passwordCheck.feedback[0] : undefined}
                 />
+                {password && !passwordCheck.isAcceptable && (
+                  <Field.Error>{passwordCheck.feedback[0]}</Field.Error>
+                )}
                 {password && passwordCheck.isAcceptable && (
                   <div className="mt-2 flex items-center justify-between text-[13px]">
                     <span className="text-neutral-500">Strength</span>
@@ -98,16 +107,23 @@ export function CreateWallet() {
                     </span>
                   </div>
                 )}
-              </div>
+              </Field>
 
-              <Input
-                label="Confirm Password"
-                type="password"
-                placeholder="Confirm your password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                error={confirmPassword && !passwordsMatch ? 'Passwords do not match' : undefined}
-              />
+              <Field
+                name="confirmPassword"
+                invalid={!!confirmPassword && !passwordsMatch}
+              >
+                <Field.Label>Confirm Password</Field.Label>
+                <Field.Control
+                  type="password"
+                  placeholder="Confirm your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                {confirmPassword && !passwordsMatch && (
+                  <Field.Error>Passwords do not match</Field.Error>
+                )}
+              </Field>
 
               {error && (
                 <Alert variant="error">{error}</Alert>
@@ -121,7 +137,7 @@ export function CreateWallet() {
               >
                 Create Wallet
               </Button>
-            </form>
+            </Form>
           </CardContent>
         </Card>
 

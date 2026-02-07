@@ -102,6 +102,7 @@ if (isOk(result)) {
 
 ## Key Conventions
 
+- **UI components**: Use `@base-ui/react` for building UI components in web and extension apps. Prefer Base UI primitives over custom implementations.
 - **Package naming**: `@open-wallet/*` scope
 - **Internal dependencies**: Use `workspace:*` in package.json
 - **Module format**: ESM only (`"type": "module"`)

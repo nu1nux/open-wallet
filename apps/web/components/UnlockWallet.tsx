@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Card, CardContent, Input, Alert } from './ui';
+import { Button, Card, CardContent, Form, Field, Alert } from './ui';
 import { useWallet } from '@/hooks/useWallet';
 
 export function UnlockWallet() {
@@ -24,21 +24,22 @@ export function UnlockWallet() {
 
         <Card padding="lg">
           <CardContent>
-            <form
+            <Form
               onSubmit={(e) => {
                 e.preventDefault();
                 handleUnlock();
               }}
-              className="space-y-4"
             >
-              <Input
-                label="Password"
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoFocus
-              />
+              <Field name="password">
+                <Field.Label>Password</Field.Label>
+                <Field.Control
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoFocus
+                />
+              </Field>
 
               {error && (
                 <Alert variant="error">{error}</Alert>
@@ -52,7 +53,7 @@ export function UnlockWallet() {
               >
                 Unlock
               </Button>
-            </form>
+            </Form>
           </CardContent>
         </Card>
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Input, Alert, Modal } from './ui';
+import { Button, Form, Field, Alert, Modal } from './ui';
 import { useWallet } from '@/hooks/useWallet';
 import { checkPassword } from '@open-wallet/security';
 
@@ -48,34 +48,43 @@ export function CreateWalletModal({ isOpen, onClose, onSuccess }: CreateWalletMo
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="Create Wallet">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <Input
-          label="Wallet Name (optional)"
-          placeholder="My Wallet"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          disabled={isLoading}
-        />
+      <Form onSubmit={handleSubmit}>
+        <Field name="name">
+          <Field.Label>Wallet Name (optional)</Field.Label>
+          <Field.Control
+            placeholder="My Wallet"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            disabled={isLoading}
+          />
+        </Field>
 
-        <Input
-          label="Wallet Alias (optional)"
-          placeholder="main-wallet"
-          value={alias}
-          onChange={(e) => setAlias(e.target.value)}
-          disabled={isLoading}
-          hint="A unique identifier for quick access"
-        />
+        <Field name="alias">
+          <Field.Label>Wallet Alias (optional)</Field.Label>
+          <Field.Control
+            placeholder="main-wallet"
+            value={alias}
+            onChange={(e) => setAlias(e.target.value)}
+            disabled={isLoading}
+          />
+          <Field.Description>A unique identifier for quick access</Field.Description>
+        </Field>
 
-        <div>
-          <Input
-            label="Password"
+        <Field
+          name="password"
+          invalid={!!password && !passwordCheck.isAcceptable}
+        >
+          <Field.Label>Password</Field.Label>
+          <Field.Control
             type="password"
             placeholder="Enter a strong password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isLoading}
-            error={password && !passwordCheck.isAcceptable ? passwordCheck.feedback[0] : undefined}
           />
+          {password && !passwordCheck.isAcceptable && (
+            <Field.Error>{passwordCheck.feedback[0]}</Field.Error>
+          )}
           {password && passwordCheck.isAcceptable && (
             <div className="mt-2 flex items-center justify-between text-[13px]">
               <span className="text-neutral-500">Strength</span>
@@ -84,17 +93,24 @@ export function CreateWalletModal({ isOpen, onClose, onSuccess }: CreateWalletMo
               </span>
             </div>
           )}
-        </div>
+        </Field>
 
-        <Input
-          label="Confirm Password"
-          type="password"
-          placeholder="Confirm your password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          disabled={isLoading}
-          error={confirmPassword && !passwordsMatch ? 'Passwords do not match' : undefined}
-        />
+        <Field
+          name="confirmPassword"
+          invalid={!!confirmPassword && !passwordsMatch}
+        >
+          <Field.Label>Confirm Password</Field.Label>
+          <Field.Control
+            type="password"
+            placeholder="Confirm your password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            disabled={isLoading}
+          />
+          {confirmPassword && !passwordsMatch && (
+            <Field.Error>Passwords do not match</Field.Error>
+          )}
+        </Field>
 
         {error && <Alert variant="error">{error}</Alert>}
 
@@ -111,7 +127,7 @@ export function CreateWalletModal({ isOpen, onClose, onSuccess }: CreateWalletMo
             Create
           </Button>
         </div>
-      </form>
+      </Form>
     </Modal>
   );
 }
