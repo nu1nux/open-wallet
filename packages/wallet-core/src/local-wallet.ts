@@ -34,17 +34,53 @@ import { releaseAlias, reserveAlias } from './alias-registry';
 
 const logger = createLogger('local-wallet');
 
-const WALLET_STORAGE_KEY = 'wallet';
-const METADATA_STORAGE_KEY = 'wallet:metadata';
+function buildWalletKeys(walletId?: string): {
+  walletStorageKey: string;
+  metadataStorageKey: string;
+} {
+  if (!walletId) {
+    return {
+      walletStorageKey: 'wallet',
+      metadataStorageKey: 'wallet:metadata',
+    };
+  }
+
+  return {
+    walletStorageKey: `wallet:${walletId}`,
+    metadataStorageKey: `wallet:${walletId}:metadata`,
+  };
+}
+
+export interface LocalWalletConfig {
+  walletId?: string;
+  walletStorageKey?: string;
+  metadataStorageKey?: string;
+}
 
 /**
  * Local wallet with encrypted keyring storage
  */
 export class LocalWallet extends BaseWallet {
   private password: string | null = null;
+  private readonly walletStorageKey: string;
+  private readonly metadataStorageKey: string;
 
-  constructor(storage: IStorage) {
+  constructor(storage: IStorage, config: LocalWalletConfig = {}) {
     super(storage, WalletType.LOCAL);
+
+    const keys = config.walletStorageKey && config.metadataStorageKey
+      ? {
+          walletStorageKey: config.walletStorageKey,
+          metadataStorageKey: config.metadataStorageKey,
+        }
+      : buildWalletKeys(config.walletId);
+
+    this.walletStorageKey = keys.walletStorageKey;
+    this.metadataStorageKey = keys.metadataStorageKey;
+
+    if (config.walletId) {
+      this.metadata.id = config.walletId;
+    }
   }
 
   async initialize(options: InitWalletOptions): Promise<Result<void>> {
@@ -99,7 +135,7 @@ export class LocalWallet extends BaseWallet {
   async unlock(password: string): Promise<Result<void>> {
     if (this.state === WalletState.UNINITIALIZED) {
       // Try to load from storage
-      const stored = await this.storage.get<StoredKeyring>(WALLET_STORAGE_KEY);
+      const stored = await this.storage.get<StoredKeyring>(this.walletStorageKey);
       if (!stored) {
         return err(ErrorCode.WALLET_NOT_INITIALIZED, 'No wallet found');
       }
@@ -108,13 +144,13 @@ export class LocalWallet extends BaseWallet {
       if (!result.ok) return result;
 
       // Load metadata
-      const metadata = await this.storage.get<typeof this.metadata>(METADATA_STORAGE_KEY);
+      const metadata = await this.storage.get<typeof this.metadata>(this.metadataStorageKey);
       if (metadata) {
         this.metadata = metadata;
       }
     } else if (this.state === WalletState.LOCKED) {
       // Re-import from storage with new password
-      const stored = await this.storage.get<StoredKeyring>(WALLET_STORAGE_KEY);
+      const stored = await this.storage.get<StoredKeyring>(this.walletStorageKey);
       if (!stored) {
         return err(ErrorCode.WALLET_NOT_INITIALIZED, 'No wallet found');
       }
@@ -266,7 +302,7 @@ export class LocalWallet extends BaseWallet {
 
   async changePassword(currentPassword: string, newPassword: string): Promise<Result<void>> {
     // Verify current password
-    const stored = await this.storage.get<StoredKeyring>(WALLET_STORAGE_KEY);
+    const stored = await this.storage.get<StoredKeyring>(this.walletStorageKey);
     if (!stored) {
       return err(ErrorCode.WALLET_NOT_INITIALIZED, 'No wallet found');
     }
@@ -327,15 +363,15 @@ export class LocalWallet extends BaseWallet {
       throw exported.error;
     }
 
-    await this.storage.set(WALLET_STORAGE_KEY, exported.value);
-    await this.storage.set(METADATA_STORAGE_KEY, this.metadata);
+    await this.storage.set(this.walletStorageKey, exported.value);
+    await this.storage.set(this.metadataStorageKey, this.metadata);
   }
 
   /**
    * Check if a wallet exists in storage
    */
-  static async exists(storage: IStorage): Promise<boolean> {
-    const wallet = await storage.get(WALLET_STORAGE_KEY);
+  static async exists(storage: IStorage, walletStorageKey = 'wallet'): Promise<boolean> {
+    const wallet = await storage.get(walletStorageKey);
     return wallet !== null;
   }
 }
@@ -343,6 +379,6 @@ export class LocalWallet extends BaseWallet {
 /**
  * Create a new local wallet
  */
-export function createLocalWallet(storage: IStorage): LocalWallet {
-  return new LocalWallet(storage);
+export function createLocalWallet(storage: IStorage, config: LocalWalletConfig = {}): LocalWallet {
+  return new LocalWallet(storage, config);
 }
